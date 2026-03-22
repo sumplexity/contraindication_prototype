@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumplexity - Contraindication screening for private practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* ===== DESIGN SYSTEM VARIABLES ===== */
+:root {
+    --brand-green:#0a4d1c;--brand-green-hover:#0c5e22;--brand-green-dark:#073914;--brand-green-subtle:#e9f2eb;
+    --success:#1a7a3a;--success-light:#e6f3eb;--success-text:#145c2c;
+    --warning:#b8860b;--warning-light:#faf3e0;--warning-text:#7a5a08;
+    --danger:#b33a3a;--danger-light:#fbeaea;--danger-text:#8c2d2d;
+    --info:#2b6cb0;--info-light:#e8f0fa;--info-text:#1e4f80;
+    --secondary-blue:#2563a8;--secondary-blue-dark:#1b4f8a;
+    --highlight:#e8d44d;
+    --text-primary:#111;--text-secondary:#444;--text-muted:#71717a;--text-faint:#a1a1aa;
+    --bg-page:#f5f5f3;--bg-elevated:#fafaf8;--bg-white:#fff;--bg-inset:#efeeeb;--bg-code:#f0efed;
+    --border-light:#e5e4e1;--border-default:#d4d3d0;--border-strong:#a8a7a4;
+    --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;--sp-16:64px;--sp-20:80px;
+    --radius-sm:3px;--radius-md:5px;--radius-lg:8px;
+    --shadow-xs:0 1px 2px rgba(0,0,0,.04);--shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);--shadow-md:0 2px 6px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);--shadow-lg:0 4px 12px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.04);--shadow-xl:0 8px 24px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
+    --ease-fast:120ms ease;--ease-normal:200ms ease;
+    --font-sans:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --font-mono:'SF Mono','JetBrains Mono',Consolas,monospace;
+    --max-width:1200px;
+}
+
+/* ===== DESIGN SYSTEM BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:var(--font-sans);font-size:.9375rem;line-height:1.6;color:var(--text-primary);background:var(--bg-page)}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--secondary-blue);text-decoration:none}a:hover{color:var(--secondary-blue-dark)}
+strong{font-weight:600}
+.icon{display:inline-block;width:1em;height:1em;vertical-align:-0.125em;flex-shrink:0}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-sans);line-height:1.25;color:var(--text-primary);letter-spacing:-0.01em}
+h1{font-size:2.25rem;font-weight:700;letter-spacing:-0.025em}
+h2{font-size:1.75rem;font-weight:700;letter-spacing:-0.02em}
+h3{font-size:1.25rem;font-weight:600}
+h4{font-size:1.0625rem;font-weight:600}
+p{margin-bottom:var(--sp-4);color:var(--text-secondary)}p:last-child{margin-bottom:0}
+.text-lead{font-size:1.125rem;color:var(--text-secondary);line-height:1.65}
+.text-small{font-size:.8125rem;color:var(--text-muted)}
+.text-caption{font-size:.6875rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)}
+
+/* Buttons */
+.btn{font-family:var(--font-sans);font-weight:500;font-size:.875rem;padding:var(--sp-2) var(--sp-4);border-radius:var(--radius-md);border:1px solid transparent;transition:all var(--ease-fast);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);outline:none;line-height:1.4;white-space:nowrap}
+.btn:focus-visible{box-shadow:0 0 0 2px var(--bg-white),0 0 0 4px var(--brand-green)}
+.btn-primary{background:var(--brand-green);border-color:var(--brand-green);color:#fff}.btn-primary:hover{background:var(--brand-green-hover);color:#fff}
+.btn-secondary{background:var(--bg-white);border-color:var(--border-default);color:var(--text-secondary)}.btn-secondary:hover{background:var(--bg-elevated);border-color:var(--border-strong);color:var(--text-primary)}
+.btn-tertiary{background:transparent;border-color:transparent;color:var(--brand-green)}.btn-tertiary:hover{background:var(--brand-green-subtle)}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--text-muted)}.btn-ghost:hover{background:var(--bg-inset);color:var(--text-primary)}
+.btn-lg{padding:var(--sp-3) var(--sp-6);font-size:.9375rem}.btn-sm{padding:var(--sp-1) var(--sp-3);font-size:.8125rem}
+.btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.btn.loading{color:transparent;position:relative;pointer-events:none}
+.btn.loading .spinner{position:absolute;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;left:50%;top:50%;transform:translate(-50%,-50%)}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* Forms */
+.form-label{display:block;margin-bottom:var(--sp-1);font-weight:500;font-size:.8125rem}
+.form-control{width:100%;padding:var(--sp-2) var(--sp-3);border:1px solid var(--border-default);border-radius:var(--radius-md);font-family:var(--font-sans);font-size:.875rem;color:var(--text-primary);background:var(--bg-white);transition:all var(--ease-fast);line-height:1.5}
+.form-control::placeholder{color:var(--text-faint)}
+.form-control:focus{outline:none;border-color:var(--brand-green);box-shadow:0 0 0 3px rgba(10,77,28,.08)}
+.form-hint{font-size:.75rem;color:var(--text-muted);margin-top:var(--sp-1)}
+.form-group{margin-bottom:var(--sp-4)}
+select.form-control{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+textarea.form-control{resize:vertical;min-height:80px}
+.form-check{display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-2)}
+.form-check input[type="checkbox"],.form-check input[type="radio"]{width:16px;height:16px;accent-color:var(--brand-green);cursor:pointer;flex-shrink:0}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:var(--radius-sm);font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;line-height:1.6}
+.badge-success{background:var(--success-light);color:var(--success-text)}
+.badge-warning{background:var(--warning-light);color:var(--warning-text)}
+.badge-danger{background:var(--danger-light);color:var(--danger-text)}
+.badge-info{background:var(--info-light);color:var(--info-text)}
+.badge-neutral{background:var(--bg-inset);color:var(--text-muted)}
+
+/* Tags */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border:1px solid var(--border-default);border-radius:20px;font-size:.75rem;font-weight:500;color:var(--text-secondary);background:var(--bg-white);transition:all var(--ease-fast)}
+.tag:hover{border-color:var(--border-strong)}
+.tag .tag-remove{cursor:pointer;color:var(--text-faint);transition:color var(--ease-fast);display:flex}.tag .tag-remove:hover{color:var(--danger)}
+.tag .tag-remove .icon{width:10px;height:10px}
+.tag.tag-brand{background:var(--brand-green-subtle);border-color:var(--brand-green-subtle);color:var(--brand-green)}
+
+/* Alerts */
+.alert{padding:var(--sp-3) var(--sp-4);border-radius:var(--radius-md);margin-bottom:var(--sp-4);display:flex;align-items:flex-start;gap:var(--sp-3);font-size:.875rem;border-left:3px solid transparent;cursor:pointer;transition:all .25s ease}
+.alert .icon{flex-shrink:0;margin-top:2px}
+.alert-success{background:var(--success-light);color:var(--success-text);border-left-color:var(--success)}
+.alert-warning{background:var(--warning-light);color:var(--warning-text);border-left-color:var(--warning)}
+.alert-danger{background:var(--danger-light);color:var(--danger-text);border-left-color:var(--danger)}
+.alert-info{background:var(--info-light);color:var(--info-text);border-left-color:var(--info)}
+
+/* Stat cards */
+.stat-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--sp-5)}
+.stat-card-value{font-size:2rem;font-weight:700;letter-spacing:-0.02em;line-height:1.1;margin-bottom:var(--sp-1)}
+.stat-card-label{font-size:.75rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em}
+.stat-card.stat-attention .stat-card-value{color:var(--danger)}.stat-card.stat-review .stat-card-value{color:var(--warning)}.stat-card.stat-good .stat-card-value{color:var(--success)}
+
+/* Finding cards */
+.finding-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-md);margin-bottom:var(--sp-3);transition:all var(--ease-fast);overflow:hidden}.finding-card:hover{border-color:var(--border-default);box-shadow:var(--shadow-xs)}
+.finding-card-header{padding:var(--sp-3) var(--sp-4);display:flex;align-items:center;gap:var(--sp-3);cursor:pointer}
+.finding-severity{width:4px;height:32px;border-radius:2px;flex-shrink:0}.finding-severity.critical{background:var(--danger)}.finding-severity.attention{background:var(--warning)}.finding-severity.guidance{background:var(--info)}.finding-severity.good-practice{background:var(--success)}
+.finding-card-content{flex:1;min-width:0}.finding-title{font-size:.875rem;font-weight:600;margin-bottom:2px}
+.finding-meta{font-size:.75rem;color:var(--text-muted);display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap}
+.finding-card-body{padding:0 var(--sp-4) var(--sp-4) calc(var(--sp-4)+4px+var(--sp-3));border-top:1px solid var(--border-light);font-size:.8125rem;color:var(--text-secondary);line-height:1.65}.finding-card-body p{font-size:.8125rem;margin-top:var(--sp-3)}
+
+/* Progress */
+.spinner{display:inline-block;border:2px solid var(--border-light);border-top-color:var(--brand-green);border-radius:50%;animation:spin2 .7s linear infinite}@keyframes spin2{to{transform:rotate(360deg)}}
+.spinner-sm{width:16px;height:16px}.spinner-md{width:28px;height:28px;border-width:3px}
+.progress-track{height:8px;background:var(--bg-inset);border-radius:4px;overflow:hidden;position:relative}
+.progress-bar{height:100%;border-radius:4px;transition:width var(--ease-normal);background:var(--brand-green);background-image:linear-gradient(45deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent);background-size:16px 16px;animation:stripe .6s linear infinite}
+@keyframes stripe{0%{background-position:16px 0}100%{background-position:0 0}}
+
+/* ===== PAGE-SPECIFIC STYLES ===== */
+
+/* Nav */
+.site-nav{background:var(--bg-white);border-bottom:1px solid var(--border-light);padding:var(--sp-3) 0;position:sticky;top:0;z-index:1000}
+.site-nav-inner{max-width:var(--max-width);margin:0 auto;padding:0 var(--sp-6);display:flex;align-items:center;justify-content:space-between}
+.site-nav-brand{display:flex;align-items:center}.site-nav-brand img{height:32px;width:auto}
+
+/* Intro */
+.intro-section{max-width:var(--max-width);margin:0 auto;padding:var(--sp-12) var(--sp-6) var(--sp-12)}
+.intro-headline{font-size:2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:var(--sp-2)}
+.intro-headline span{color:var(--brand-green)}
+.intro-sub{font-size:1rem;color:var(--text-muted);margin-bottom:var(--sp-10);max-width:720px}
+.intro-grid{display:flex;flex-direction:column;gap:var(--sp-5);margin-bottom:var(--sp-10)}
+.intro-block{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--sp-6);box-shadow:var(--shadow-sm);transition:box-shadow var(--ease-normal)}
+.intro-block:hover{box-shadow:var(--shadow-md)}
+.intro-block-number{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--brand-green);color:#fff;font-size:.75rem;font-weight:700;margin-bottom:var(--sp-3);flex-shrink:0}
+.intro-block h3{font-size:1.0625rem;font-weight:700;margin-bottom:var(--sp-3);color:var(--text-primary);line-height:1.35}
+.intro-block p{font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-bottom:0}
+.intro-block .credibility{font-size:.8125rem;color:var(--text-faint);margin-top:var(--sp-3);font-style:italic;padding-top:var(--sp-3);border-top:1px solid var(--border-light)}
+.intro-cta{text-align:center;margin-bottom:var(--sp-4)}
+
+/* App panel (demo + survey) */
+.app-panel{max-width:900px;margin:0 auto var(--sp-12);background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;box-shadow:var(--shadow-xl);overflow:visible}
+.app-panel-header{background:var(--bg-elevated);border-bottom:1px solid var(--border-light);padding:var(--sp-4) var(--sp-6);display:flex;align-items:center;justify-content:space-between;border-radius:12px 12px 0 0}
+.app-panel-title{font-size:.9375rem;font-weight:700;color:var(--text-primary)}
+.app-panel-body{padding:var(--sp-6) var(--sp-6) var(--sp-8)}
+
+/* Survey panel — green accent */
+.survey-panel .app-panel-header{background:var(--brand-green);border-bottom-color:var(--brand-green-dark)}
+.survey-panel .app-panel-title{color:#fff}
+
+/* Step indicator */
+.step-indicator{display:flex;align-items:center;gap:0}
+.step-dot{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:.6875rem;font-weight:700;background:var(--bg-inset);color:var(--text-faint);border:2px solid var(--border-light);transition:all var(--ease-normal);position:relative}
+.step-dot.active{background:var(--brand-green);color:#fff;border-color:var(--brand-green)}
+.step-dot.completed{background:var(--brand-green-subtle);color:var(--brand-green);border-color:var(--brand-green)}
+.step-label{font-size:.6875rem;font-weight:500;color:var(--text-faint);margin-left:var(--sp-1);margin-right:var(--sp-3)}
+.step-dot.active + .step-label{color:var(--brand-green);font-weight:600}
+.step-dot.completed + .step-label{color:var(--brand-green)}
+.step-connector{width:24px;height:2px;background:var(--border-light);margin:0 var(--sp-1);transition:background var(--ease-normal)}
+.step-connector.completed{background:var(--brand-green)}
+
+/* Demo panels */
+.demo-panel{display:none}
+.demo-panel.active{display:block}
+
+/* Multi-select */
+.multi-select{position:relative;margin-bottom:var(--sp-4)}
+.multi-select-input{display:flex;flex-wrap:wrap;gap:4px;padding:6px 8px;border:1px solid var(--border-default);border-radius:var(--radius-md);background:var(--bg-white);min-height:40px;cursor:text;transition:border-color var(--ease-fast)}
+.multi-select-input:focus-within{border-color:var(--brand-green);box-shadow:0 0 0 3px rgba(10,77,28,.08)}
+.multi-select-input input{border:none;outline:none;font-family:var(--font-sans);font-size:.875rem;flex:1;min-width:120px;padding:2px 4px;background:transparent;color:var(--text-primary)}
+.multi-select-input input::placeholder{color:var(--text-faint)}
+.multi-select-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);max-height:200px;overflow-y:auto;z-index:50;display:none}
+.multi-select-dropdown.open{display:block}
+.multi-select-option{padding:var(--sp-2) var(--sp-3);font-size:.8125rem;cursor:pointer;transition:background var(--ease-fast);color:var(--text-secondary)}
+.multi-select-option:hover{background:var(--bg-inset);color:var(--text-primary)}
+.multi-select-no-results{padding:var(--sp-3);font-size:.8125rem;color:var(--text-faint);text-align:center}
+
+/* Example patients */
+.example-patients{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-bottom:var(--sp-6)}
+.example-patient-btn{padding:var(--sp-2) var(--sp-3);border:1px solid var(--border-default);border-radius:var(--radius-md);font-family:var(--font-sans);font-size:.75rem;font-weight:500;cursor:pointer;background:var(--bg-white);color:var(--text-secondary);transition:all var(--ease-fast);display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:140px}
+.example-patient-btn:hover{border-color:var(--brand-green);color:var(--brand-green)}
+.example-patient-btn .patient-name{font-weight:600;font-size:.8125rem}
+.example-patient-btn .patient-hint{font-size:.6875rem;color:var(--text-faint)}
+
+/* Info tooltip */
+.info-tooltip{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--bg-inset);color:var(--text-faint);font-size:.625rem;font-weight:700;cursor:help;margin-left:var(--sp-1);position:relative;vertical-align:middle}
+.info-tooltip:hover{background:var(--brand-green-subtle);color:var(--brand-green)}
+.info-tooltip .tip-text{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--text-primary);color:#fff;font-size:.6875rem;font-weight:400;padding:6px 10px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--ease-fast);z-index:60;max-width:260px;white-space:normal;line-height:1.4;text-transform:none;letter-spacing:0}
+.info-tooltip .tip-text::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--text-primary)}
+.info-tooltip:hover .tip-text{opacity:1}
+
+/* Procedure grid */
+.procedure-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4)}
+.procedure-category h4{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:var(--sp-2);padding-bottom:var(--sp-1);border-bottom:1px solid var(--border-light)}
+.procedure-option{display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-1) var(--sp-2);border-radius:var(--radius-md);cursor:pointer;transition:background var(--ease-fast);font-size:.8125rem;color:var(--text-secondary)}
+.procedure-option:hover{background:var(--bg-inset)}
+.procedure-option.selected{background:var(--brand-green-subtle);color:var(--brand-green);font-weight:500}
+.procedure-option input[type="radio"]{width:14px;height:14px;accent-color:var(--brand-green);cursor:pointer;flex-shrink:0}
+.procedure-option label{cursor:pointer;flex:1}
+
+/* Loading animation */
+.loading-state{text-align:center;padding:var(--sp-8) 0}
+.loading-state h4{margin-bottom:var(--sp-6)}
+.loading-steps-list{list-style:none;text-align:left;max-width:480px;margin:0 auto var(--sp-6)}
+.loading-steps-list li{padding:var(--sp-2) var(--sp-3);font-size:.8125rem;color:var(--text-faint);display:flex;align-items:center;gap:var(--sp-2);border-radius:var(--radius-md);transition:all .2s ease}
+.loading-steps-list li .spinner-icon{display:none;width:14px;height:14px;border:2px solid var(--border-light);border-top-color:var(--brand-green);border-radius:50%;animation:spin2 .7s linear infinite;flex-shrink:0}
+.loading-steps-list li .check-icon{display:none;color:var(--success);font-size:.875rem;flex-shrink:0;width:14px;text-align:center}
+.loading-steps-list li.active{color:var(--text-primary);font-weight:500;background:var(--bg-inset)}
+.loading-steps-list li.active .spinner-icon{display:inline-block}
+.loading-steps-list li.done{color:var(--success)}
+.loading-steps-list li.done .check-icon{display:inline-block}
+.loading-current-action{font-size:.75rem;color:var(--text-faint);font-family:var(--font-mono)}
+
+/* Risk output */
+.risk-output{margin-top:var(--sp-4)}
+.risk-banner{padding:var(--sp-5);border-radius:var(--radius-lg);display:flex;align-items:flex-start;gap:var(--sp-4);margin-bottom:var(--sp-6)}
+.risk-banner-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.risk-banner-text h3{margin-bottom:var(--sp-1);font-size:1.0625rem}
+.risk-banner-text p{font-size:.8125rem;margin-bottom:0}
+.risk-banner.risk-high{background:var(--danger-light);border:1px solid var(--danger);color:var(--danger-text)}
+.risk-banner.risk-moderate{background:var(--warning-light);border:1px solid var(--warning);color:var(--warning-text)}
+.risk-banner.risk-low{background:var(--success-light);border:1px solid var(--success);color:var(--success-text)}
+
+.risk-summary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-bottom:var(--sp-6)}
+.findings-list h4{margin-bottom:var(--sp-3)}
+
+/* Demo nav buttons */
+.demo-nav{display:flex;justify-content:space-between;align-items:center;margin-top:var(--sp-6);padding-top:var(--sp-4);border-top:1px solid var(--border-light)}
+
+/* Survey form */
+.survey-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4)}
+
+/* Success messages */
+.success-message{display:none;text-align:center;padding:var(--sp-8) var(--sp-4)}
+.success-message.show{display:block}
+.success-message h3{color:var(--success);margin-bottom:var(--sp-2)}
+.success-message p{color:var(--text-muted);font-size:.875rem}
+
+/* Waitlist section */
+.waitlist-section{background:var(--brand-green-dark);padding:var(--sp-12) var(--sp-6)}
+.waitlist-inner{max-width:560px;margin:0 auto;text-align:center}
+.waitlist-inner h2{color:#fff;margin-bottom:var(--sp-2);font-size:1.5rem}
+.waitlist-inner p{color:rgba(255,255,255,.7);margin-bottom:var(--sp-6);font-size:.9375rem}
+.waitlist-form-wrap{display:flex;gap:var(--sp-2);max-width:440px;margin:0 auto}
+.waitlist-form-wrap input{flex:1;padding:var(--sp-3) var(--sp-4);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-md);font-family:var(--font-sans);font-size:.875rem;background:rgba(255,255,255,.1);color:#fff}
+.waitlist-form-wrap input::placeholder{color:rgba(255,255,255,.5)}
+.waitlist-form-wrap input:focus{outline:none;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.15)}
+.waitlist-form-wrap button{padding:var(--sp-3) var(--sp-5);background:#fff;color:var(--brand-green);border:none;border-radius:var(--radius-md);font-family:var(--font-sans);font-weight:600;font-size:.875rem;cursor:pointer;white-space:nowrap;transition:background var(--ease-fast)}
+.waitlist-form-wrap button:hover{background:var(--brand-green-subtle)}
+
+/* Footer */
+.site-footer{text-align:center;padding:var(--sp-6);font-size:.75rem;color:var(--text-faint)}
+
+/* Left sidebar navigation */
+.side-nav{position:fixed;left:var(--sp-4);top:100px;z-index:900;display:flex;flex-direction:column;gap:0;background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--sp-3) 0;box-shadow:var(--shadow-md)}
+.side-nav a{font-size:.75rem;color:var(--text-muted);text-decoration:none;padding:var(--sp-2) var(--sp-4);border-left:3px solid transparent;transition:all var(--ease-normal);line-height:1.4;display:block;white-space:nowrap}
+.side-nav a:hover{color:var(--text-primary);background:var(--bg-elevated)}
+.side-nav a.active{color:var(--brand-green);border-left-color:var(--brand-green);font-weight:600;background:var(--brand-green-subtle)}
+
+/* Section dividers */
+hr.section-break{display:none}
+#demo{background:var(--bg-white);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
+#survey{background:var(--bg-page)}
+.waitlist-section{border-top:1px solid var(--border-light)}
+
+/* Intro block bullet lists */
+.intro-block ul{list-style:none;padding:0;margin:0}
+.intro-block li{font-size:.8125rem;color:var(--text-muted);line-height:1.6;padding:var(--sp-1) 0;padding-left:var(--sp-4);position:relative}
+.intro-block li::before{content:'\2022';position:absolute;left:0;color:var(--brand-green);font-weight:600}
+
+/* Feature ranking — drag to reorder */
+.ranking-list{display:flex;flex-direction:column;gap:var(--sp-2)}
+.ranking-slot{display:flex;align-items:center;gap:var(--sp-3)}
+.ranking-slot-number{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--brand-green);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ranking-item{display:flex;align-items:center;gap:var(--sp-3);font-size:.8125rem;color:var(--text-secondary);padding:var(--sp-3) var(--sp-4);background:var(--bg-white);border-radius:var(--radius-md);border:1px solid var(--border-light);cursor:grab;user-select:none;transition:all .15s ease;flex:1}
+.ranking-item:active{cursor:grabbing}
+.ranking-item:hover{border-color:var(--brand-green);box-shadow:var(--shadow-sm)}
+.ranking-item.dragging{opacity:.3;border-style:dashed}
+.ranking-slot{position:relative}
+.ranking-slot.insert-after::after{content:'';position:absolute;bottom:-5px;left:40px;right:0;height:3px;background:var(--brand-green);border-radius:2px;z-index:10;pointer-events:none}
+.ranking-slot.insert-after::before{content:'';position:absolute;bottom:-8px;left:34px;width:10px;height:10px;background:var(--brand-green);border-radius:50%;z-index:10;pointer-events:none}
+.ranking-handle{display:flex;flex-direction:column;gap:2px;flex-shrink:0;color:var(--text-faint);padding:0 var(--sp-1)}
+.ranking-handle span{display:block;width:12px;height:2px;background:currentColor;border-radius:1px}
+.ranking-label{flex:1}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+    .side-nav{display:none}
+    .intro-grid{gap:var(--sp-4)}
+    .intro-headline{font-size:1.5rem}
+    .intro-section{padding:var(--sp-8) var(--sp-4) var(--sp-6)}
+    .app-panel{margin-left:var(--sp-3);margin-right:var(--sp-3);border-radius:var(--radius-lg)}
+    .app-panel-header{padding:var(--sp-3) var(--sp-4);flex-wrap:wrap;gap:var(--sp-2)}
+    .app-panel-body{padding:var(--sp-4) var(--sp-4) var(--sp-6)}
+    .step-label{display:none}
+    .procedure-grid{grid-template-columns:1fr}
+    .risk-summary-stats{grid-template-columns:repeat(3,1fr)}
+    .survey-grid{grid-template-columns:1fr}
+    .example-patients{flex-direction:column}
+    .example-patient-btn{min-width:auto}
+    .waitlist-form-wrap{flex-direction:column}
+    .info-tooltip .tip-text{left:auto;right:0;transform:none}
+    .info-tooltip .tip-text::after{left:auto;right:12px;transform:none}
+}
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="site-nav">
+    <div class="site-nav-inner">
+        <a href="#" class="site-nav-brand"><img src="assets/logos/logo_name_tagline_nobackg.png" alt="Sumplexity — Automating the complex. Amplifying the human."></a>
+        <a href="#demo" class="btn btn-primary btn-sm">Try the demo</a>
+    </div>
+</nav>
+
+<!-- ===== SIDE NAV ===== -->
+<nav class="side-nav">
+    <a href="#intro" class="active">The challenge</a>
+    <a href="#demo">The tool</a>
+    <a href="#survey">Shape the product</a>
+    <a href="#waitlist">Early access</a>
+</nav>
+
+<!-- ===== INTRO ===== -->
+<section id="intro" class="intro-section">
+    <h1 class="intro-headline">AI-powered contraindication screening <span>for private practice</span></h1>
+    <p class="intro-sub">Cross-reference medications, conditions, and allergies against any procedure, reliably and instantly. Practitioners shift from manual lookups to confident, highly informed decisions.</p>
+
+    <div class="intro-grid">
+        <div class="intro-block">
+            <span class="intro-block-number">1</span>
+            <h3>Contraindication: a vital process for private practice risk and quality, but how robust is it?</h3>
+            <ul>
+                <li>The BNF covers drug interactions, not procedure-specific contraindications</li>
+                <li>SmPCs describe side effects, not clinical protocols for aesthetic or dental contexts</li>
+                <li>NICE guidelines follow NHS pathways, not private clinic workflows</li>
+                <li>Practitioners synthesise across 5+ disconnected sources, per patient, per procedure, under time pressure</li>
+                <li>No single tool connects a patient's full profile to the specific risks of a planned procedure</li>
+            </ul>
+        </div>
+        <div class="intro-block">
+            <span class="intro-block-number">2</span>
+            <h3>...with an evolving landscape, expertise in demand and fragmented data sources, the impacts of errors are catastrophic</h3>
+            <ul>
+                <li>New medications, biologics, and GLP-1 agonists reaching market quarterly. Guidelines cannot keep pace</li>
+                <li>Clinical negligence claims rising year on year. A missed contraindication is indefensible in court</li>
+                <li>New UK licensing requirements demand documented, auditable pre-procedure safety checks</li>
+                <li>NHS hospitals embed automated alerts in every prescribing system. Private practice bears all the risk, with none of the tooling</li>
+            </ul>
+        </div>
+        <div class="intro-block">
+            <span class="intro-block-number">3</span>
+            <h3>...teams do not need replacing, they need to be converted from data processors to highly informed decision-makers, quickly</h3>
+            <ul>
+                <li>Cross-references medications, conditions, and allergies against any planned procedure in seconds</li>
+                <li>Draws on BNF, NICE guidelines, SmPCs, MHRA safety updates, and pharmacovigilance databases. Always current</li>
+                <li>Deterministic and auditable. Every finding is traceable to a named clinical source</li>
+                <li>Practitioner time freed for the clinical judgement calls only they can make</li>
+            </ul>
+            <p class="credibility">Built by former PwC AI and regulatory compliance specialists, alongside a medico-legal clinical assessor who sees the consequences when pre-procedure checks fail.</p>
+        </div>
+        <div class="intro-block">
+            <span class="intro-block-number">4</span>
+            <h3>...try the tooling now which can empower your people, and help mould it to how YOUR practice works</h3>
+            <ul>
+                <li>Select patient details below, or load from example profiles</li>
+                <li>Choose the planned procedure and see what the tool flags in real time</li>
+                <li>Takes 60 seconds, then tell us which capabilities would matter most in your practice</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="intro-cta">
+        <a href="#demo" class="btn btn-primary btn-lg">Try the tool in 60 seconds</a>
+    </div>
+</section>
+
+<hr class="section-break">
+
+<!-- ===== DEMO PANEL ===== -->
+<div id="demo" style="padding:var(--sp-12) var(--sp-6);">
+    <div class="app-panel">
+        <div class="app-panel-header">
+            <span class="app-panel-title">See how this could transform your pre-procedure checks</span>
+            <div class="step-indicator">
+                <div class="step-dot active" data-step="1">1</div>
+                <span class="step-label">Patient</span>
+                <div class="step-connector"></div>
+                <div class="step-dot" data-step="2">2</div>
+                <span class="step-label">Procedure</span>
+                <div class="step-connector"></div>
+                <div class="step-dot" data-step="3">3</div>
+                <span class="step-label">Assessment</span>
+            </div>
+        </div>
+        <div class="app-panel-body">
+
+            <!-- STEP 1: Patient input -->
+            <div id="step-1" class="demo-panel active">
+                <h3 style="margin-bottom:var(--sp-3);">Build the patient picture</h3>
+                <ol style="margin:0 0 var(--sp-6) var(--sp-5);font-size:.8125rem;color:var(--text-muted);line-height:1.7;display:flex;flex-direction:column;gap:var(--sp-1);">
+                    <li>Select a patient's current medications, medical conditions, and known allergies below, or load an example profile to get started</li>
+                    <li>Choose the planned procedure on the next screen</li>
+                    <li>The tool cross-references the full patient profile against BNF interactions, SmPC contraindications, NICE guidelines, and pharmacovigilance data</li>
+                    <li>Review the risk assessment. Each finding links to the specific clinical source and recommended actions</li>
+                </ol>
+
+                <div style="margin-bottom:var(--sp-4);">
+                    <p class="text-caption" style="margin-bottom:var(--sp-2);">Example patients</p>
+                    <div class="example-patients">
+                        <button class="example-patient-btn" data-patient="sarah">
+                            <span class="patient-name">Sarah, 68</span>
+                            <span class="patient-hint">Warfarin, diabetes, AF</span>
+                        </button>
+                        <button class="example-patient-btn" data-patient="james">
+                            <span class="patient-name">James, 24</span>
+                            <span class="patient-hint">On Roaccutane</span>
+                        </button>
+                        <button class="example-patient-btn" data-patient="priya">
+                            <span class="patient-name">Priya, 32</span>
+                            <span class="patient-hint">Pregnant, lidocaine allergy</span>
+                        </button>
+                        <button class="example-patient-btn" data-patient="mark">
+                            <span class="patient-name">Mark, 55</span>
+                            <span class="patient-hint">Methotrexate, RA</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Current medications
+                        <span class="info-tooltip">?<span class="tip-text">Include all prescription and over-the-counter medications, supplements, and topical treatments.</span></span>
+                    </label>
+                    <div id="medications-select" class="multi-select" data-name="medications"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Medical conditions
+                        <span class="info-tooltip">?<span class="tip-text">Include diagnosed conditions, active skin conditions, pregnancy/breastfeeding status.</span></span>
+                    </label>
+                    <div id="conditions-select" class="multi-select" data-name="conditions"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Known allergies
+                        <span class="info-tooltip">?<span class="tip-text">Include drug allergies, material allergies (e.g. latex, nickel), and any history of adverse reactions.</span></span>
+                    </label>
+                    <div id="allergies-select" class="multi-select" data-name="allergies"></div>
+                </div>
+
+                <div class="demo-nav" style="justify-content:flex-end;">
+                    <button id="step1-next" class="btn btn-primary">Continue to procedure</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Procedure selection -->
+            <div id="step-2" class="demo-panel">
+                <h3 style="margin-bottom:var(--sp-2);">What procedure is planned?</h3>
+                <p class="text-small" style="margin-bottom:var(--sp-6);">Choose the planned procedure to assess against the patient profile.</p>
+
+                <div id="procedure-grid" class="procedure-grid"></div>
+
+                <div class="demo-nav">
+                    <button id="step2-back" class="btn btn-ghost">Back</button>
+                    <button id="step2-next" class="btn btn-primary" disabled>Run assessment</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Assessment results -->
+            <div id="step-3" class="demo-panel">
+                <div id="loading-state" style="display:none;">
+                    <h4>Running clinical intelligence</h4>
+                    <div style="max-width:480px;margin:0 auto var(--sp-4);">
+                        <div class="progress-track"><div class="progress-bar indeterminate"></div></div>
+                    </div>
+                    <ul id="loading-steps-list" class="loading-steps-list"></ul>
+                    <p id="loading-current-action" class="loading-current-action"></p>
+                </div>
+
+                <div id="risk-output" style="display:none;"></div>
+
+                <div id="results-nav" class="demo-nav" style="display:none;">
+                    <button id="step3-restart" class="btn btn-secondary">New assessment</button>
+                    <a href="#survey" class="btn btn-primary">Share feedback</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr class="section-break">
+
+<!-- ===== SURVEY PANEL ===== -->
+<div id="survey" style="padding:var(--sp-12) var(--sp-6);">
+    <div class="app-panel survey-panel">
+        <div class="app-panel-header">
+            <span class="app-panel-title">Help us build the tool your practice needs</span>
+        </div>
+        <div class="app-panel-body">
+            <p style="margin-bottom:var(--sp-6);font-size:.875rem;color:var(--text-secondary);">Help us build the right tool. Your input directly shapes what we build next.</p>
+
+            <form id="survey-form">
+                <div class="form-group">
+                    <label class="form-label">Drag to rank the features that matter most</label>
+                    <p class="form-hint" style="margin-bottom:var(--sp-3);">Drag features into your preferred order. Position 1 = most important.</p>
+                    <div class="ranking-list" id="ranking-list">
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">1</div>
+                            <div class="ranking-item" draggable="true" data-feature="drug_interactions">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Drug-procedure interaction checking</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">2</div>
+                            <div class="ranking-item" draggable="true" data-feature="allergy_cross">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Allergy cross-reactivity alerts</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">3</div>
+                            <div class="ranking-item" draggable="true" data-feature="audit">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Audit trail and compliance documentation</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">4</div>
+                            <div class="ranking-item" draggable="true" data-feature="nice">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">NICE guideline integration</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">5</div>
+                            <div class="ranking-item" draggable="true" data-feature="patient_records">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Patient record / PMS integration</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">6</div>
+                            <div class="ranking-item" draggable="true" data-feature="consent">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Auto-generated consent form additions</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">7</div>
+                            <div class="ranking-item" draggable="true" data-feature="alternatives">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Alternative procedure suggestions</span>
+                            </div>
+                        </div>
+                        <div class="ranking-slot">
+                            <div class="ranking-slot-number">8</div>
+                            <div class="ranking-item" draggable="true" data-feature="mobile">
+                                <div class="ranking-handle"><span></span><span></span><span></span></div>
+                                <span class="ranking-label">Mobile app</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How do you currently handle pre-procedure contraindication checks?</label>
+                    <select class="form-control" name="current_process">
+                        <option value="">Select...</option>
+                        <option value="manual_bnf">Manual BNF / SmPC lookup each time</option>
+                        <option value="mental_checklist">From memory / mental checklist</option>
+                        <option value="paper_protocol">Paper-based protocol or checklist</option>
+                        <option value="pms_built_in">Built into our practice management software</option>
+                        <option value="delegate_pharmacist">Delegate to pharmacist or prescriber</option>
+                        <option value="no_formal">No formal process in place</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How long does a typical pre-procedure check take you today?</label>
+                    <select class="form-control" name="check_duration">
+                        <option value="">Select...</option>
+                        <option value="under_2min">Under 2 minutes</option>
+                        <option value="2_5min">2 to 5 minutes</option>
+                        <option value="5_15min">5 to 15 minutes</option>
+                        <option value="15_plus">15+ minutes</option>
+                        <option value="varies">Varies significantly by patient</option>
+                    </select>
+                </div>
+
+                <div class="survey-grid">
+                    <div class="form-group">
+                        <label class="form-label">Practice type</label>
+                        <select class="form-control" name="practice_type">
+                            <option value="">Select...</option>
+                            <option value="aesthetic_clinic">Aesthetic clinic</option>
+                            <option value="cosmetic_surgery">Cosmetic surgery</option>
+                            <option value="private_dentistry">Private dentistry</option>
+                            <option value="dermatology">Dermatology</option>
+                            <option value="gp_private">Private GP</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Practice size</label>
+                        <select class="form-control" name="practice_size">
+                            <option value="">Select...</option>
+                            <option value="solo">Solo practitioner</option>
+                            <option value="small">2 to 5 practitioners</option>
+                            <option value="medium">6 to 15 practitioners</option>
+                            <option value="large">16+ practitioners</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What is your biggest concern about pre-procedure safety? (optional)</label>
+                    <textarea class="form-control" name="safety_concern" rows="3" placeholder="e.g. keeping up with new medications, audit trail for insurance, time pressure between appointments..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email (optional)</label>
+                    <input type="email" name="email" class="form-control" placeholder="you@practice.co.uk">
+                    <span class="form-hint">We will only contact you about early access and product updates.</span>
+                </div>
+
+                <!-- Hidden tracking fields -->
+                <input type="hidden" id="hidden-medications" name="demo_medications">
+                <input type="hidden" id="hidden-conditions" name="demo_conditions">
+                <input type="hidden" id="hidden-allergies" name="demo_allergies">
+                <input type="hidden" id="hidden-procedure" name="demo_procedure">
+                <input type="hidden" id="hidden-risk-level" name="demo_risk_level">
+                <input type="hidden" id="hidden-utm-source" name="utm_source">
+                <input type="hidden" id="hidden-utm-medium" name="utm_medium">
+                <input type="hidden" id="hidden-utm-campaign" name="utm_campaign">
+                <input type="hidden" id="hidden-device-type" name="device_type">
+
+                <div style="text-align:right;margin-top:var(--sp-4);">
+                    <button type="submit" class="btn btn-primary">Submit feedback</button>
+                </div>
+            </form>
+
+            <div id="survey-success" class="success-message">
+                <h3>Thank you</h3>
+                <p>Your feedback has been recorded. We'll be in touch when early access is available.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-break">
+
+<!-- ===== WAITLIST ===== -->
+<section id="waitlist" class="waitlist-section">
+    <div class="waitlist-inner">
+        <h2>Help build the tool private practice is missing</h2>
+        <p>Early contributors shape what we build. Join now to get hands-on access, feed back directly to the team, and influence the features that matter to your practice.</p>
+        <form id="waitlist-form" class="waitlist-form-wrap">
+            <input type="email" name="email" placeholder="you@practice.co.uk" required>
+            <input type="hidden" name="form_type" value="waitlist">
+            <input type="hidden" name="utm_source" class="utm-source">
+            <input type="hidden" name="utm_medium" class="utm-medium">
+            <input type="hidden" name="utm_campaign" class="utm-campaign">
+            <button type="submit">Become an early contributor</button>
+        </form>
+        <div id="waitlist-success" class="success-message" style="color:rgba(255,255,255,.9);">
+            <h3 style="color:#fff;">You are in</h3>
+            <p style="color:rgba(255,255,255,.7);">We will be in touch with early access details shortly.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    &copy; 2026 Sumplexity Ltd. All rights reserved.
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/* Risk data engine — hardcoded scenarios and lookup logic. */
+
+const MEDICATIONS = [
+    'Warfarin', 'Rivaroxaban', 'Apixaban', 'Aspirin', 'Clopidogrel',
+    'Isotretinoin (Roaccutane)', 'Tretinoin (topical retinoid)', 'Adapalene',
+    'Methotrexate', 'Lithium',
+    'Ibuprofen', 'Naproxen', 'Diclofenac',
+    'Ciclosporin', 'Azathioprine', 'Tacrolimus', 'Mycophenolate',
+    'Sertraline', 'Fluoxetine', 'Citalopram', 'Venlafaxine', 'Paroxetine',
+    'Metformin', 'Insulin', 'Gliclazide',
+    'Amlodipine', 'Ramipril', 'Lisinopril', 'Bisoprolol',
+    'Prednisolone', 'Hydrocortisone',
+];
+
+const CONDITIONS = [
+    'Diabetes (Type 1)', 'Diabetes (Type 2)',
+    'Hypertension', 'Heart disease', 'Atrial fibrillation',
+    'Bleeding disorder', 'Haemophilia', 'Von Willebrand disease',
+    'Autoimmune condition', 'Lupus', 'Rheumatoid arthritis',
+    'Epilepsy',
+    'Pregnancy', 'Breastfeeding',
+    'Keloid scarring tendency',
+    'Active skin infection', 'Eczema (active flare)', 'Psoriasis (active)',
+    'Liver disease', 'Kidney disease',
+    'HIV/immunocompromised',
+];
+
+const ALLERGIES = [
+    'Lidocaine', 'Prilocaine', 'Local anaesthetics (amide group)',
+    'Latex',
+    'Aspirin / NSAIDs',
+    'Penicillin', 'Amoxicillin',
+    'Adhesives / plasters',
+    'Hyaluronic acid',
+    'Nickel',
+    'Chlorhexidine',
+];
+
+const PROCEDURES = {
+    'Injectables': [
+        'Botox (botulinum toxin)',
+        'Dermal fillers (hyaluronic acid)',
+        'Lip filler',
+        'PRP (platelet-rich plasma)',
+        'Mesotherapy',
+        'Fat dissolving (Kybella/Aqualyx)',
+    ],
+    'Laser / energy': [
+        'Laser hair removal',
+        'IPL (intense pulsed light)',
+        'Fractional laser resurfacing',
+        'RF microneedling',
+        'HIFU',
+        'Cryolipolysis (CoolSculpting)',
+    ],
+    'Chemical / topical': [
+        'Chemical peel (glycolic)',
+        'Chemical peel (TCA)',
+        'Chemical peel (phenol)',
+        'Microneedling',
+        'Dermaplaning',
+        'Microdermabrasion',
+    ],
+    'Surgical': [
+        'Liposuction',
+        'Blepharoplasty',
+        'Rhinoplasty',
+        'Breast augmentation',
+        'Abdominoplasty',
+        'BBL (Brazilian butt lift)',
+    ],
+    'Dental': [
+        'Tooth extraction',
+        'Dental implant',
+        'Root canal',
+        'Crown preparation',
+        'Teeth whitening',
+        'Sedation dentistry',
+    ],
+};
+
+// Procedure tag helpers
+const PROC_TAGS = {
+    injectable: [
+        'Botox (botulinum toxin)', 'Dermal fillers (hyaluronic acid)', 'Lip filler',
+        'PRP (platelet-rich plasma)', 'Mesotherapy', 'Fat dissolving (Kybella/Aqualyx)',
+    ],
+    laser: [
+        'Laser hair removal', 'IPL (intense pulsed light)', 'Fractional laser resurfacing',
+        'RF microneedling', 'HIFU',
+    ],
+    lightBased: [
+        'Laser hair removal', 'IPL (intense pulsed light)', 'Fractional laser resurfacing',
+    ],
+    chemical: [
+        'Chemical peel (glycolic)', 'Chemical peel (TCA)', 'Chemical peel (phenol)',
+    ],
+    skinSurface: [
+        'Chemical peel (glycolic)', 'Chemical peel (TCA)', 'Chemical peel (phenol)',
+        'Microneedling', 'Dermaplaning', 'Microdermabrasion',
+        'Laser hair removal', 'IPL (intense pulsed light)', 'Fractional laser resurfacing',
+        'RF microneedling',
+    ],
+    woundHealing: [
+        'Microneedling', 'Dermaplaning', 'RF microneedling',
+        'Chemical peel (TCA)', 'Chemical peel (phenol)',
+        'Fractional laser resurfacing',
+        'Liposuction', 'Blepharoplasty', 'Rhinoplasty', 'Breast augmentation', 'Abdominoplasty', 'BBL (Brazilian butt lift)',
+        'Dental implant', 'Tooth extraction',
+    ],
+    bleedingRisk: [
+        'Botox (botulinum toxin)', 'Dermal fillers (hyaluronic acid)', 'Lip filler',
+        'PRP (platelet-rich plasma)', 'Mesotherapy', 'Fat dissolving (Kybella/Aqualyx)',
+        'Microneedling', 'RF microneedling',
+        'Liposuction', 'Blepharoplasty', 'Rhinoplasty', 'Breast augmentation', 'Abdominoplasty', 'BBL (Brazilian butt lift)',
+        'Tooth extraction', 'Dental implant', 'Root canal',
+    ],
+    infectionRisk: [
+        'Microneedling', 'RF microneedling', 'Dermaplaning',
+        'Chemical peel (TCA)', 'Chemical peel (phenol)',
+        'Liposuction', 'Blepharoplasty', 'Rhinoplasty', 'Breast augmentation', 'Abdominoplasty', 'BBL (Brazilian butt lift)',
+        'Dental implant', 'Tooth extraction', 'Root canal',
+        'Dermal fillers (hyaluronic acid)', 'Lip filler',
+    ],
+    surgical: [
+        'Liposuction', 'Blepharoplasty', 'Rhinoplasty',
+        'Breast augmentation', 'Abdominoplasty', 'BBL (Brazilian butt lift)',
+    ],
+    localAnaesthetic: [
+        'Dermal fillers (hyaluronic acid)', 'Lip filler', 'Fat dissolving (Kybella/Aqualyx)',
+        'Tooth extraction', 'Dental implant', 'Root canal', 'Crown preparation',
+        'Liposuction', 'Blepharoplasty', 'Rhinoplasty',
+        'Chemical peel (phenol)',
+    ],
+    dental: [
+        'Tooth extraction', 'Dental implant', 'Root canal',
+        'Crown preparation', 'Teeth whitening', 'Sedation dentistry',
+    ],
+};
+
+function procHasTag(procedure, tag) {
+    return PROC_TAGS[tag] && PROC_TAGS[tag].includes(procedure);
+}
+
+function hasAny(items, terms) {
+    const lowerTerms = terms.map(t => t.toLowerCase());
+    return items.some(item => lowerTerms.some(t => item.toLowerCase().includes(t)));
+}
+
+const SCENARIOS = [
+    {
+        id: 'blood_thinners_bleeding',
+        title: 'Anticoagulant therapy with bleeding-risk procedure',
+        triggerMeds: ['warfarin', 'rivaroxaban', 'apixaban', 'clopidogrel'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'bleedingRisk',
+        severity: 'critical',
+        category: 'Drug-procedure interaction',
+        explanation: 'Anticoagulant medications significantly increase bleeding risk during and after invasive procedures. Uncontrolled bleeding can lead to haematoma formation, delayed healing, and in severe cases, compartment syndrome.',
+        recommendations: [
+            'Consult prescribing physician regarding anticoagulant management pre-procedure',
+            'Consider INR testing within 24 hours of procedure (for warfarin)',
+            'Ensure haemostatic agents are available during procedure',
+            'Extended post-procedure observation period recommended',
+            'Patient should avoid additional NSAIDs/aspirin for 7 days post-procedure',
+        ],
+    },
+    {
+        id: 'isotretinoin_skin',
+        title: 'Isotretinoin use with skin resurfacing procedure',
+        triggerMeds: ['isotretinoin', 'roaccutane'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'skinSurface',
+        severity: 'critical',
+        category: 'Drug-procedure contraindication',
+        explanation: 'Isotretinoin causes significant thinning of the epidermis and impairs wound healing by reducing sebaceous gland activity and altering collagen synthesis. Skin procedures during or shortly after isotretinoin use carry high risk of abnormal scarring, delayed healing, and post-inflammatory hyperpigmentation.',
+        recommendations: [
+            'Absolute contraindication: discontinue isotretinoin at least 6 months before any ablative skin procedure',
+            'For non-ablative procedures, a minimum 3-month washout period is recommended',
+            'Document isotretinoin cessation date and verify with prescribing dermatologist',
+            'Consider alternative treatments that do not involve epidermal disruption',
+        ],
+    },
+    {
+        id: 'methotrexate_healing',
+        title: 'Methotrexate with procedure requiring wound healing',
+        triggerMeds: ['methotrexate'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'woundHealing',
+        severity: 'attention',
+        category: 'Drug-procedure interaction',
+        explanation: 'Methotrexate is an immunosuppressant and antifolate that impairs cell division, directly affecting wound healing capacity and increasing infection risk. Patients on methotrexate may experience delayed healing and higher susceptibility to post-procedure complications.',
+        recommendations: [
+            'Consult prescribing rheumatologist or physician regarding temporary dose adjustment',
+            'Consider withholding methotrexate for 1\u20132 weeks pre- and post-procedure (with prescriber approval)',
+            'Monitor wound healing closely. Schedule additional follow-up appointments',
+            'Ensure prophylactic infection management protocols are in place',
+            'Check full blood count prior to procedure to assess immunosuppression level',
+        ],
+    },
+    {
+        id: 'lithium_anaesthetic',
+        title: 'Lithium therapy with local anaesthetic procedure',
+        triggerMeds: ['lithium'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'localAnaesthetic',
+        severity: 'attention',
+        category: 'Drug interaction',
+        explanation: 'Lithium can potentiate the duration and effect of certain local anaesthetics and neuromuscular blocking agents. Additionally, NSAIDs commonly prescribed post-procedure can elevate lithium levels to toxic concentrations by reducing renal clearance.',
+        recommendations: [
+            'Check lithium levels within 7 days pre-procedure',
+            'Avoid prescribing NSAIDs post-procedure. Use paracetamol for pain management',
+            'Use minimal effective dose of local anaesthetic',
+            'Monitor for signs of lithium toxicity post-procedure (tremor, nausea, confusion)',
+            'Inform the patient\'s psychiatrist of the planned procedure',
+        ],
+    },
+    {
+        id: 'nsaids_bleeding',
+        title: 'NSAID/aspirin use with bleeding-risk procedure',
+        triggerMeds: ['aspirin', 'ibuprofen', 'naproxen', 'diclofenac'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'bleedingRisk',
+        severity: 'attention',
+        category: 'Drug-procedure interaction',
+        explanation: 'NSAIDs and aspirin inhibit platelet aggregation and prolong bleeding time. While the effect is less severe than anticoagulants, it meaningfully increases bruising, swelling, and haematoma risk during injectable and surgical procedures.',
+        recommendations: [
+            'Advise patient to discontinue NSAIDs 7 days before procedure (if clinically appropriate)',
+            'Aspirin: consult prescribing physician before discontinuation. May be prescribed for cardiovascular protection',
+            'Use paracetamol as alternative analgesic pre- and post-procedure',
+            'Apply extended pressure to injection/incision sites',
+            'Advise patient that increased bruising is likely if NSAIDs cannot be stopped',
+        ],
+    },
+    {
+        id: 'immunosuppressant_infection',
+        title: 'Immunosuppressant therapy with infection-risk procedure',
+        triggerMeds: ['ciclosporin', 'azathioprine', 'tacrolimus', 'mycophenolate', 'methotrexate'],
+        triggerConditions: ['hiv', 'immunocompromised'],
+        triggerAllergies: [],
+        procedureTag: 'infectionRisk',
+        severity: 'attention',
+        category: 'Drug-procedure interaction',
+        explanation: 'Immunosuppressant medications reduce the body\'s ability to fight infection, significantly increasing the risk of post-procedure infection. Any procedure that breaches the skin barrier carries elevated risk in immunosuppressed patients.',
+        recommendations: [
+            'Perform full blood count and infection markers pre-procedure',
+            'Consider prophylactic antibiotics (consult prescribing physician)',
+            'Ensure strict aseptic technique. Enhanced infection control protocol',
+            'Schedule extended follow-up to monitor for signs of infection',
+            'Educate patient on post-procedure infection warning signs',
+            'Consider whether procedure can be timed during lowest immunosuppression period',
+        ],
+    },
+    {
+        id: 'ssri_adrenaline',
+        title: 'SSRI use with adrenaline-containing local anaesthetic',
+        triggerMeds: ['sertraline', 'fluoxetine', 'citalopram', 'venlafaxine', 'paroxetine'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'localAnaesthetic',
+        severity: 'guidance',
+        category: 'Drug interaction',
+        explanation: 'SSRIs can interact with adrenaline (epinephrine) in local anaesthetic formulations, potentially causing hypertensive episodes or arrhythmias. The clinical significance is generally low but warrants awareness, particularly with higher adrenaline concentrations.',
+        recommendations: [
+            'Use local anaesthetic with low or no adrenaline concentration where possible',
+            'Monitor blood pressure and heart rate during procedure',
+            'Limit adrenaline dose. Maximum 2 cartridges of 1:80,000 in dental procedures',
+            'Aspirate before injection to avoid intravascular administration',
+            'SSRIs also impair platelet function. Expect slightly increased bruising',
+        ],
+    },
+    {
+        id: 'pregnancy_procedures',
+        title: 'Pregnancy with cosmetic procedure',
+        triggerMeds: [],
+        triggerConditions: ['pregnancy'],
+        triggerAllergies: [],
+        procedureTag: 'skinSurface',
+        severity: 'critical',
+        category: 'Condition-procedure contraindication',
+        explanation: 'Most cosmetic procedures are contraindicated during pregnancy due to potential teratogenic effects (chemical peels, retinoid-based treatments), unknown safety profiles (botulinum toxin), and altered skin physiology that increases risk of hyperpigmentation and abnormal scarring.',
+        recommendations: [
+            'Absolute contraindication for botulinum toxin. No safety data in pregnancy',
+            'Absolute contraindication for chemical peels containing salicylic acid, retinoids, or phenol',
+            'Defer all non-essential aesthetic procedures until post-partum',
+            'If patient is breastfeeding, additional restrictions apply to many topical agents',
+            'Document pregnancy status and deferral decision in patient records',
+        ],
+        additionalProcedures: ['Botox (botulinum toxin)'],
+    },
+    {
+        id: 'diabetes_surgery',
+        title: 'Diabetes with surgical or slow-healing procedure',
+        triggerMeds: [],
+        triggerConditions: ['diabetes'],
+        triggerAllergies: [],
+        procedureTag: 'woundHealing',
+        severity: 'attention',
+        category: 'Condition-procedure risk factor',
+        explanation: 'Diabetes impairs wound healing through multiple pathways: reduced blood flow, neuropathy, and impaired immune response. Poorly controlled diabetes (HbA1c >8.5%) significantly increases risk of post-operative infection, delayed healing, and surgical complications.',
+        recommendations: [
+            'Check HbA1c within 3 months pre-procedure. Defer if >8.5% without physician approval',
+            'Check fasting blood glucose on day of procedure. Defer if >15 mmol/L',
+            'Ensure patient has eaten and taken medications normally before procedure',
+            'Schedule procedure early in the day to minimise fasting-related glucose disruption',
+            'Plan enhanced post-procedure wound monitoring',
+            'Consider diabetes specialist nurse referral for peri-procedure glucose management',
+        ],
+    },
+    {
+        id: 'bleeding_disorder',
+        title: 'Bleeding disorder with invasive procedure',
+        triggerMeds: [],
+        triggerConditions: ['bleeding disorder', 'haemophilia', 'von willebrand'],
+        triggerAllergies: [],
+        procedureTag: 'bleedingRisk',
+        severity: 'critical',
+        category: 'Condition-procedure contraindication',
+        explanation: 'Inherited or acquired bleeding disorders significantly increase the risk of uncontrolled bleeding, haematoma, and post-operative haemorrhage during any invasive procedure. Severity depends on the specific disorder and factor levels.',
+        recommendations: [
+            'Obtain haematology consultation and recent clotting profile before proceeding',
+            'Confirm factor levels are within safe range for the planned procedure',
+            'Ensure appropriate factor replacement therapy is available if needed',
+            'Avoid concurrent anticoagulant or antiplatelet medications',
+            'Extended post-procedure monitoring. Minimum 2 hours observation',
+            'Have haemostatic agents and emergency protocols readily available',
+        ],
+    },
+    {
+        id: 'lidocaine_allergy',
+        title: 'Local anaesthetic allergy with procedure requiring anaesthesia',
+        triggerMeds: [],
+        triggerConditions: [],
+        triggerAllergies: ['lidocaine', 'prilocaine', 'local anaesthetic'],
+        procedureTag: 'localAnaesthetic',
+        severity: 'critical',
+        category: 'Allergy-procedure contraindication',
+        explanation: 'Documented allergy to amide-group local anaesthetics (lidocaine, prilocaine, bupivacaine) contraindicates the use of all anaesthetics in this class. Cross-reactivity within the amide group is possible. True allergy vs. vasovagal response or adrenaline reaction must be distinguished.',
+        recommendations: [
+            'Do not administer any amide-group local anaesthetic without allergy testing',
+            'Refer for formal allergy testing (skin prick + intradermal) if allergy history is unclear',
+            'If confirmed amide allergy: consider ester-group alternative (e.g. chloroprocaine, procaine)',
+            'If allergy to all local anaesthetics: procedure may require general anaesthesia or deferral',
+            'Ensure adrenaline and resuscitation equipment are immediately available',
+            'Document allergy prominently in patient records',
+        ],
+    },
+    {
+        id: 'skin_infection_surface',
+        title: 'Active skin infection with skin-surface procedure',
+        triggerMeds: [],
+        triggerConditions: ['active skin infection', 'eczema (active flare)', 'psoriasis (active)'],
+        triggerAllergies: [],
+        procedureTag: 'skinSurface',
+        severity: 'critical',
+        category: 'Condition-procedure contraindication',
+        explanation: 'Performing any skin-surface procedure over or near active infection, inflamed eczema, or active psoriasis risks spreading infection, exacerbating the underlying condition, and causing severe complications including cellulitis and sepsis.',
+        recommendations: [
+            'Absolute contraindication: defer procedure until infection/flare is fully resolved',
+            'Treat underlying infection with appropriate antimicrobial therapy first',
+            'Minimum 2-week clearance period after infection resolution before rescheduling',
+            'For eczema/psoriasis: ensure stable, well-controlled disease before proceeding',
+            'Document skin assessment and deferral decision in patient records',
+        ],
+    },
+    {
+        id: 'keloid_scarring',
+        title: 'Keloid scarring tendency with wound-creating procedure',
+        triggerMeds: [],
+        triggerConditions: ['keloid scarring'],
+        triggerAllergies: [],
+        procedureTag: 'woundHealing',
+        severity: 'attention',
+        category: 'Condition-procedure risk factor',
+        explanation: 'Patients with a history of keloid scarring have an abnormal wound healing response that produces excessive collagen, leading to raised, thickened scars. Any procedure that creates a wound carries risk of keloid formation, particularly on the chest, shoulders, earlobes, and jawline.',
+        recommendations: [
+            'Assess keloid history: location, size, previous treatments, family history',
+            'Consider procedure location. High-risk areas (chest, shoulders, ears) should be avoided',
+            'Discuss keloid risk explicitly during consent process',
+            'Consider prophylactic silicone sheeting or pressure therapy post-procedure',
+            'Start early intervention at first sign of abnormal scarring',
+            'For surgical procedures: consider intralesional corticosteroid at time of closure',
+        ],
+    },
+    {
+        id: 'epilepsy_light',
+        title: 'Epilepsy with light-based procedure',
+        triggerMeds: [],
+        triggerConditions: ['epilepsy'],
+        triggerAllergies: [],
+        procedureTag: 'lightBased',
+        severity: 'attention',
+        category: 'Condition-procedure risk factor',
+        explanation: 'Flashing or pulsed light from laser and IPL devices can potentially trigger seizures in patients with photosensitive epilepsy. While the risk is primarily relevant to the ~3% of epilepsy patients with confirmed photosensitivity, caution is warranted as photosensitivity status is often unknown.',
+        recommendations: [
+            'Determine whether patient has photosensitive epilepsy. Request neurology confirmation if unknown',
+            'If confirmed photosensitive: light-based procedures are contraindicated',
+            'If not photosensitive: procedure may proceed with precautions',
+            'Ensure anti-epileptic medications are taken as prescribed on procedure day',
+            'Have seizure management protocol and recovery position training in place',
+            'Avoid treatment near the eyes; use appropriate eye protection',
+            'Consider alternative non-light-based treatments where available',
+        ],
+    },
+    {
+        id: 'retinoid_topical_skin',
+        title: 'Topical retinoid use with skin resurfacing procedure',
+        triggerMeds: ['tretinoin', 'adapalene', 'retinoid'],
+        triggerConditions: [],
+        triggerAllergies: [],
+        procedureTag: 'skinSurface',
+        severity: 'attention',
+        category: 'Drug-procedure interaction',
+        explanation: 'Topical retinoids increase skin cell turnover and thin the stratum corneum, making skin more vulnerable to chemical and mechanical disruption. This increases the risk of burns, excessive peeling, and post-inflammatory hyperpigmentation from skin-surface procedures.',
+        recommendations: [
+            'Discontinue topical retinoid 5\u20137 days before procedure',
+            'For stronger retinoids (tretinoin 0.1%), consider 10\u201314 days cessation',
+            'Assess skin sensitivity on day of procedure. Reschedule if irritation is present',
+            'Use lower-concentration peeling agents or reduced treatment parameters',
+            'Resume retinoid 7\u201314 days post-procedure once skin has fully healed',
+        ],
+    },
+];
+
+function assessRisk(medications, conditions, allergies, procedure) {
+    const findings = [];
+
+    for (const scenario of SCENARIOS) {
+        let matches = false;
+
+        if (scenario.triggerMeds.length > 0 && hasAny(medications, scenario.triggerMeds)) {
+            if (scenario.procedureTag && procHasTag(procedure, scenario.procedureTag)) {
+                matches = true;
+            }
+        }
+
+        if (scenario.triggerConditions.length > 0 && hasAny(conditions, scenario.triggerConditions)) {
+            if (scenario.procedureTag && procHasTag(procedure, scenario.procedureTag)) {
+                matches = true;
+            }
+        }
+
+        if (scenario.triggerAllergies.length > 0 && hasAny(allergies, scenario.triggerAllergies)) {
+            if (scenario.procedureTag && procHasTag(procedure, scenario.procedureTag)) {
+                matches = true;
+            }
+        }
+
+        if (scenario.additionalProcedures && scenario.additionalProcedures.includes(procedure)) {
+            const condMatch = scenario.triggerConditions.length > 0 && hasAny(conditions, scenario.triggerConditions);
+            const medMatch = scenario.triggerMeds.length > 0 && hasAny(medications, scenario.triggerMeds);
+            if (condMatch || medMatch) {
+                matches = true;
+            }
+        }
+
+        if (matches) {
+            findings.push(scenario);
+        }
+    }
+
+    let overallRisk = 'low';
+    if (findings.some(f => f.severity === 'critical')) {
+        overallRisk = 'high';
+    } else if (findings.some(f => f.severity === 'attention')) {
+        overallRisk = 'moderate';
+    } else if (findings.length > 0) {
+        overallRisk = 'low';
+    }
+
+    const isFallback = findings.length === 0;
+
+    return { overallRisk, findings, procedure, isFallback };
+}
+
+
+/* Silent tracking — UTM capture, device detection, demo state. */
+
+const Tracking = {
+    utmParams: {},
+    demoState: {
+        medications: [],
+        conditions: [],
+        allergies: [],
+        procedure: '',
+        riskLevel: '',
+    },
+
+    init() {
+        this.captureUtmParams();
+        this.setDeviceType();
+        this.populateHiddenFields();
+    },
+
+    captureUtmParams() {
+        const params = new URLSearchParams(window.location.search);
+        this.utmParams = {
+            source: params.get('utm_source') || '',
+            medium: params.get('utm_medium') || '',
+            campaign: params.get('utm_campaign') || '',
+        };
+    },
+
+    setDeviceType() {
+        const width = window.innerWidth;
+        if (width <= 768) {
+            this.deviceType = 'mobile';
+        } else if (width <= 1024) {
+            this.deviceType = 'tablet';
+        } else {
+            this.deviceType = 'desktop';
+        }
+    },
+
+    updateDemoState(key, value) {
+        this.demoState[key] = value;
+        this.populateHiddenFields();
+    },
+
+    populateHiddenFields() {
+        const setVal = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.value = typeof val === 'object' ? JSON.stringify(val) : val;
+        };
+
+        setVal('hidden-medications', this.demoState.medications);
+        setVal('hidden-conditions', this.demoState.conditions);
+        setVal('hidden-allergies', this.demoState.allergies);
+        setVal('hidden-procedure', this.demoState.procedure);
+        setVal('hidden-risk-level', this.demoState.riskLevel);
+        setVal('hidden-utm-source', this.utmParams.source);
+        setVal('hidden-utm-medium', this.utmParams.medium);
+        setVal('hidden-utm-campaign', this.utmParams.campaign);
+        setVal('hidden-device-type', this.deviceType);
+
+        document.querySelectorAll('.utm-source').forEach(el => el.value = this.utmParams.source || '');
+        document.querySelectorAll('.utm-medium').forEach(el => el.value = this.utmParams.medium || '');
+        document.querySelectorAll('.utm-campaign').forEach(el => el.value = this.utmParams.campaign || '');
+    },
+
+    getSubmissionData() {
+        return {
+            ...this.demoState,
+            ...this.utmParams,
+            device_type: this.deviceType,
+            timestamp: new Date().toISOString(),
+        };
+    },
+};
+
+
+/* Form submission — posts to Google Apps Script webhook. */
+
+const Forms = {
+    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbzjME_m544mhHg60sTPiI9pbzjOb9wqWuySeO-d96lug9MwvsPCgM5c46HqsBN-NYFITg/exec',
+
+    init() {
+        this.initSurveyForm();
+        this.initWaitlistForm();
+    },
+
+    initSurveyForm() {
+        const form = document.getElementById('survey-form');
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            btn.classList.add('loading');
+            btn.innerHTML = '<span class="spinner"></span>Submitting';
+
+            const data = new FormData(form);
+            const payload = Object.fromEntries(data.entries());
+
+            const rankings = {};
+            document.querySelectorAll('#ranking-list .ranking-slot').forEach((slot, idx) => {
+                const item = slot.querySelector('.ranking-item');
+                if (item) rankings[item.dataset.feature] = idx + 1;
+            });
+            payload.feature_rankings = rankings;
+
+            const trackingData = Tracking.getSubmissionData();
+            Object.assign(payload, trackingData);
+
+            const success = await this.submit(payload);
+
+            btn.classList.remove('loading');
+            btn.textContent = 'Submit feedback';
+
+            if (success) {
+                form.style.display = 'none';
+                document.getElementById('survey-success')?.classList.add('show');
+            }
+        });
+    },
+
+    initWaitlistForm() {
+        const form = document.getElementById('waitlist-form');
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            btn.classList.add('loading');
+            btn.innerHTML = '<span class="spinner"></span>Joining';
+
+            const data = new FormData(form);
+            const payload = Object.fromEntries(data.entries());
+            payload.timestamp = new Date().toISOString();
+            payload.device_type = Tracking.deviceType;
+
+            const success = await this.submit(payload);
+
+            btn.classList.remove('loading');
+            btn.textContent = 'Join waitlist';
+
+            if (success) {
+                form.style.display = 'none';
+                document.getElementById('waitlist-success')?.classList.add('show');
+            }
+        });
+    },
+
+    async submit(payload) {
+        if (!this.WEBHOOK_URL) {
+            console.log('[Form submission — no webhook configured]', payload);
+            return true;
+        }
+
+        try {
+            await fetch(this.WEBHOOK_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            return true;
+        } catch (err) {
+            console.error('Form submission failed:', err);
+            return true;
+        }
+    },
+};
+
+
+/* Demo UI — 3-step flow, multi-select inputs, procedure selection, result rendering. */
+
+const Demo = {
+    currentStep: 1,
+    selectedProcedure: null,
+    multiSelects: {},
+
+    examplePatients: {
+        sarah: {
+            medications: ['Warfarin', 'Metformin', 'Ramipril'],
+            conditions: ['Diabetes (Type 2)', 'Hypertension', 'Atrial fibrillation'],
+            allergies: [],
+        },
+        james: {
+            medications: ['Isotretinoin (Roaccutane)'],
+            conditions: [],
+            allergies: [],
+        },
+        priya: {
+            medications: [],
+            conditions: ['Pregnancy'],
+            allergies: ['Lidocaine', 'Latex'],
+        },
+        mark: {
+            medications: ['Methotrexate', 'Prednisolone'],
+            conditions: ['Rheumatoid arthritis', 'Autoimmune condition'],
+            allergies: ['Penicillin'],
+        },
+    },
+
+    loadingPipeline: [
+        'Resolving medications against NHS dm+d database...',
+        'Mapping conditions to SNOMED CT clinical terms...',
+        'Classifying procedure via OPCS-4...',
+        'Searching BNF interaction database...',
+        'Querying FDB Multilex drug-drug interactions...',
+        'Checking SmPC contraindications (Section 4.3) on EMC...',
+        'Reviewing SmPC interaction data (Section 4.5)...',
+        'Cross-referencing NICE clinical guidelines...',
+        'Checking MHRA Drug Safety Updates...',
+        'Screening drug-allergy cross-sensitivity profiles...',
+        'Analysing CYP450 enzyme interaction pathways...',
+        'Scanning MHRA Yellow Card adverse reaction signals...',
+        'Searching WHO VigiBase global safety reports...',
+        'Evaluating procedure-specific risk factors...',
+        'Generating risk severity assessment...',
+    ],
+
+    init() {
+        this.initMultiSelects();
+        this.initProcedureGrid();
+        this.initNavigation();
+        this.initExamplePatients();
+    },
+
+    initMultiSelects() {
+        const configs = {
+            'medications-select': { options: MEDICATIONS, placeholder: 'Search medications...' },
+            'conditions-select': { options: CONDITIONS, placeholder: 'Search conditions...' },
+            'allergies-select': { options: ALLERGIES, placeholder: 'Search allergies...' },
+        };
+
+        for (const [id, config] of Object.entries(configs)) {
+            const container = document.getElementById(id);
+            if (!container) continue;
+            this.multiSelects[id] = this.createMultiSelect(container, config);
+        }
+    },
+
+    createMultiSelect(container, config) {
+        const state = { selected: [], options: config.options };
+
+        const inputWrap = document.createElement('div');
+        inputWrap.className = 'multi-select-input';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = config.placeholder;
+        inputWrap.appendChild(input);
+
+        const dropdown = document.createElement('div');
+        dropdown.className = 'multi-select-dropdown';
+
+        container.appendChild(inputWrap);
+        container.appendChild(dropdown);
+
+        const renderTags = () => {
+            inputWrap.querySelectorAll('.tag').forEach(t => t.remove());
+            state.selected.forEach(item => {
+                const tag = document.createElement('span');
+                tag.className = 'tag tag-brand';
+                tag.innerHTML = `${item} <span class="tag-remove" data-value="${item}"><svg class="icon" style="width:10px;height:10px;" viewBox="0 0 16 16" fill="currentColor"><path d="M4.28 3.22a.75.75 0 00-1.06 1.06L6.94 8l-3.72 3.72a.75.75 0 101.06 1.06L8 9.06l3.72 3.72a.75.75 0 101.06-1.06L9.06 8l3.72-3.72a.75.75 0 00-1.06-1.06L8 6.94 4.28 3.22z"/></svg></span>`;
+                inputWrap.insertBefore(tag, input);
+            });
+            const name = container.dataset.name;
+            if (name) Tracking.updateDemoState(name, [...state.selected]);
+        };
+
+        const renderDropdown = (filter = '') => {
+            const lowerFilter = filter.toLowerCase();
+            const filtered = state.options.filter(opt =>
+                opt.toLowerCase().includes(lowerFilter) && !state.selected.includes(opt)
+            );
+
+            if (filtered.length === 0) {
+                dropdown.innerHTML = '<div class="multi-select-no-results">No matches found</div>';
+            } else {
+                dropdown.innerHTML = filtered.map(opt =>
+                    `<div class="multi-select-option" data-value="${opt}">${opt}</div>`
+                ).join('');
+            }
+        };
+
+        input.addEventListener('focus', () => {
+            renderDropdown(input.value);
+            dropdown.classList.add('open');
+        });
+
+        input.addEventListener('input', () => {
+            renderDropdown(input.value);
+            dropdown.classList.add('open');
+        });
+
+        dropdown.addEventListener('mousedown', (e) => {
+            const option = e.target.closest('.multi-select-option');
+            if (!option) return;
+            e.preventDefault();
+            const value = option.dataset.value;
+            if (!state.selected.includes(value)) {
+                state.selected.push(value);
+                renderTags();
+                input.value = '';
+                renderDropdown('');
+            }
+        });
+
+        inputWrap.addEventListener('click', (e) => {
+            const remove = e.target.closest('.tag-remove');
+            if (remove) {
+                const value = remove.dataset.value;
+                state.selected = state.selected.filter(s => s !== value);
+                renderTags();
+                renderDropdown(input.value);
+                return;
+            }
+            input.focus();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+
+        return state;
+    },
+
+    initProcedureGrid() {
+        const grid = document.getElementById('procedure-grid');
+        if (!grid) return;
+
+        let html = '';
+        for (const [category, procedures] of Object.entries(PROCEDURES)) {
+            html += `<div class="procedure-category">`;
+            html += `<h4>${category}</h4>`;
+            procedures.forEach(proc => {
+                const id = proc.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                html += `
+                    <div class="procedure-option" data-procedure="${proc}">
+                        <input type="radio" name="procedure" id="proc_${id}" value="${proc}">
+                        <label for="proc_${id}">${proc}</label>
+                    </div>`;
+            });
+            html += `</div>`;
+        }
+        grid.innerHTML = html;
+
+        grid.addEventListener('click', (e) => {
+            const option = e.target.closest('.procedure-option');
+            if (!option) return;
+
+            grid.querySelectorAll('.procedure-option').forEach(o => o.classList.remove('selected'));
+            option.classList.add('selected');
+            option.querySelector('input').checked = true;
+            this.selectedProcedure = option.dataset.procedure;
+            Tracking.updateDemoState('procedure', this.selectedProcedure);
+
+            document.getElementById('step2-next').disabled = false;
+        });
+    },
+
+    initExamplePatients() {
+        document.querySelectorAll('.example-patient-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const patientId = btn.dataset.patient;
+                const patient = this.examplePatients[patientId];
+                if (!patient) return;
+
+                for (const [id, state] of Object.entries(this.multiSelects)) {
+                    state.selected = [];
+                }
+
+                const fieldMap = {
+                    'medications-select': patient.medications,
+                    'conditions-select': patient.conditions,
+                    'allergies-select': patient.allergies,
+                };
+
+                for (const [selectId, values] of Object.entries(fieldMap)) {
+                    const state = this.multiSelects[selectId];
+                    if (!state) continue;
+                    state.selected = [...values];
+                    const container = document.getElementById(selectId);
+                    if (container) {
+                        container.querySelectorAll('.tag').forEach(t => t.remove());
+                        const inputWrap = container.querySelector('.multi-select-input');
+                        const input = container.querySelector('input[type="text"]');
+                        values.forEach(item => {
+                            const tag = document.createElement('span');
+                            tag.className = 'tag tag-brand';
+                            tag.innerHTML = `${item} <span class="tag-remove" data-value="${item}"><svg class="icon" style="width:10px;height:10px;" viewBox="0 0 16 16" fill="currentColor"><path d="M4.28 3.22a.75.75 0 00-1.06 1.06L6.94 8l-3.72 3.72a.75.75 0 101.06 1.06L8 9.06l3.72 3.72a.75.75 0 101.06-1.06L9.06 8l3.72-3.72a.75.75 0 00-1.06-1.06L8 6.94 4.28 3.22z"/></svg></span>`;
+                            inputWrap.insertBefore(tag, input);
+                        });
+                    }
+                    const name = document.getElementById(selectId)?.dataset.name;
+                    if (name) Tracking.updateDemoState(name, [...values]);
+                }
+
+                document.querySelectorAll('.example-patient-btn').forEach(b => {
+                    b.style.borderColor = '';
+                    b.style.background = '';
+                    b.style.color = '';
+                });
+                btn.style.borderColor = 'var(--brand-green)';
+                btn.style.background = 'var(--brand-green-subtle)';
+                btn.style.color = 'var(--brand-green)';
+            });
+        });
+    },
+
+    initNavigation() {
+        document.getElementById('step1-next')?.addEventListener('click', () => {
+            const hasMeds = this.multiSelects['medications-select']?.selected.length > 0;
+            const hasConds = this.multiSelects['conditions-select']?.selected.length > 0;
+            const hasAllergies = this.multiSelects['allergies-select']?.selected.length > 0;
+
+            if (!hasMeds && !hasConds && !hasAllergies) {
+                const firstInput = document.querySelector('#step-1 .multi-select-input');
+                if (firstInput) {
+                    firstInput.style.borderColor = 'var(--danger)';
+                    setTimeout(() => firstInput.style.borderColor = '', 2000);
+                }
+                return;
+            }
+            this.goToStep(2);
+        });
+
+        document.getElementById('step2-back')?.addEventListener('click', () => this.goToStep(1));
+
+        document.getElementById('step2-next')?.addEventListener('click', () => {
+            if (!this.selectedProcedure) return;
+            this.goToStep(3);
+            this.runAssessment();
+        });
+
+        document.getElementById('step3-restart')?.addEventListener('click', () => {
+            this.reset();
+        });
+    },
+
+    goToStep(step) {
+        this.currentStep = step;
+
+        document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(`step-${step}`)?.classList.add('active');
+
+        document.querySelectorAll('.step-dot').forEach(dot => {
+            const dotStep = parseInt(dot.dataset.step);
+            dot.classList.remove('active', 'completed');
+            if (dotStep === step) dot.classList.add('active');
+            else if (dotStep < step) dot.classList.add('completed');
+        });
+
+        document.querySelectorAll('.step-connector').forEach((conn, i) => {
+            conn.classList.toggle('completed', i + 1 < step);
+        });
+
+        document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    },
+
+    runAssessment() {
+        const meds = this.multiSelects['medications-select']?.selected || [];
+        const conds = this.multiSelects['conditions-select']?.selected || [];
+        const allergies = this.multiSelects['allergies-select']?.selected || [];
+
+        const loadingEl = document.getElementById('loading-state');
+        const outputEl = document.getElementById('risk-output');
+        const navEl = document.getElementById('results-nav');
+        const stepsList = document.getElementById('loading-steps-list');
+        const currentAction = document.getElementById('loading-current-action');
+
+        loadingEl.style.display = 'block';
+        outputEl.style.display = 'none';
+        navEl.style.display = 'none';
+
+        const shuffled = [...this.loadingPipeline].sort(() => Math.random() - 0.5);
+        const selectedSteps = [
+            this.loadingPipeline[0],
+            ...shuffled.filter(s => s !== this.loadingPipeline[0]).slice(0, 7),
+            this.loadingPipeline[this.loadingPipeline.length - 1],
+        ];
+
+        stepsList.innerHTML = selectedSteps.map(step =>
+            `<li class="pending"><span class="spinner-icon"></span><span class="check-icon">&#10003;</span> ${step}</li>`
+        ).join('');
+
+        const items = stepsList.querySelectorAll('li');
+        let currentIdx = 0;
+
+        const advanceNext = () => {
+            if (currentIdx > 0) items[currentIdx - 1].className = 'done';
+
+            if (currentIdx < items.length) {
+                items[currentIdx].className = 'active';
+                currentAction.textContent = selectedSteps[currentIdx];
+                currentIdx++;
+                const delay = 300 + Math.random() * 400;
+                setTimeout(advanceNext, delay);
+            } else {
+                setTimeout(() => {
+                    loadingEl.style.display = 'none';
+                    const result = assessRisk(meds, conds, allergies, this.selectedProcedure);
+                    Tracking.updateDemoState('riskLevel', result.overallRisk);
+                    this.renderResult(result);
+                    outputEl.style.display = 'block';
+                    navEl.style.display = 'flex';
+                }, 400);
+            }
+        };
+
+        setTimeout(advanceNext, 500);
+    },
+
+    renderResult(result) {
+        const outputEl = document.getElementById('risk-output');
+
+        if (result.isFallback) {
+            outputEl.innerHTML = this.renderFallback(result);
+            return;
+        }
+
+        const riskLabels = {
+            high: { label: 'High risk', desc: 'One or more absolute contraindications identified. Proceed only after addressing all critical findings.', icon: '&#9888;' },
+            moderate: { label: 'Moderate risk', desc: 'Relative contraindications or precautions identified. Proceed with modified protocol and additional safeguards.', icon: '&#9888;' },
+            low: { label: 'Low risk', desc: 'Minor considerations identified. Standard protocols apply with awareness of noted factors.', icon: '&#10003;' },
+        };
+
+        const riskInfo = riskLabels[result.overallRisk];
+        const criticalCount = result.findings.filter(f => f.severity === 'critical').length;
+        const attentionCount = result.findings.filter(f => f.severity === 'attention').length;
+        const guidanceCount = result.findings.filter(f => f.severity === 'guidance').length;
+
+        let html = `
+            <div class="risk-output">
+                <div class="risk-banner risk-${result.overallRisk}">
+                    <div class="risk-banner-icon">${riskInfo.icon}</div>
+                    <div class="risk-banner-text">
+                        <h3>${riskInfo.label} - ${result.procedure}</h3>
+                        <p>${riskInfo.desc}</p>
+                    </div>
+                </div>
+
+                <div class="risk-summary-stats">
+                    <div class="stat-card${criticalCount > 0 ? ' stat-attention' : ''}">
+                        <div class="stat-card-value">${criticalCount}</div>
+                        <div class="stat-card-label">Critical</div>
+                    </div>
+                    <div class="stat-card${attentionCount > 0 ? ' stat-review' : ''}">
+                        <div class="stat-card-value">${attentionCount}</div>
+                        <div class="stat-card-label">Attention</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">${guidanceCount}</div>
+                        <div class="stat-card-label">Guidance</div>
+                    </div>
+                </div>
+
+                <div class="findings-list">
+                    <h4>Findings</h4>
+                    ${result.findings.map(f => this.renderFinding(f)).join('')}
+                </div>
+
+                <div style="margin-top:var(--sp-4);padding:var(--sp-4);background:var(--info-light);border-radius:var(--radius-md);border-left:3px solid var(--info);">
+                    <h4 style="font-size:.875rem;color:var(--info-text);margin-bottom:var(--sp-2);">Consider alternative approaches</h4>
+                    <p style="font-size:.8125rem;color:var(--info-text);margin:0;">The full tool will suggest comparable procedures with lower contraindication risk for this patient profile, helping you explore options rather than simply flagging problems.</p>
+                </div>
+            </div>`;
+
+        outputEl.innerHTML = html;
+
+        outputEl.querySelectorAll('.finding-card-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const body = header.nextElementSibling;
+                if (body && body.classList.contains('finding-card-body')) {
+                    body.style.display = body.style.display === 'none' ? 'block' : 'none';
+                }
+            });
+        });
+    },
+
+    renderFinding(finding) {
+        const severityLabels = {
+            critical: { badge: 'badge-danger', label: 'Critical' },
+            attention: { badge: 'badge-warning', label: 'Attention' },
+            guidance: { badge: 'badge-info', label: 'Guidance' },
+        };
+
+        const sev = severityLabels[finding.severity];
+
+        return `
+            <div class="finding-card">
+                <div class="finding-card-header">
+                    <div class="finding-severity ${finding.severity}"></div>
+                    <div class="finding-card-content">
+                        <div class="finding-title">${finding.title}</div>
+                        <div class="finding-meta">
+                            <span class="badge ${sev.badge}" style="font-size:.5625rem">${sev.label}</span>
+                            <span>${finding.category}</span>
+                        </div>
+                    </div>
+                    <svg class="icon" style="width:16px;height:16px;color:var(--text-faint);flex-shrink:0;" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="finding-card-body" style="display:none;">
+                    <p><strong>Clinical reasoning:</strong> ${finding.explanation}</p>
+                    <p style="margin-top:var(--sp-3);"><strong>Recommended actions:</strong></p>
+                    <ul style="margin-top:var(--sp-2);padding-left:var(--sp-5);font-size:.8125rem;">
+                        ${finding.recommendations.map(r => `<li style="margin-bottom:var(--sp-1);">${r}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>`;
+    },
+
+    renderFallback(result) {
+        return `
+            <div class="risk-output">
+                <div class="alert alert-success">
+                    <svg class="icon" style="width:20px;height:20px;" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div>
+                        <strong>No known contraindications identified</strong>
+                        <p style="margin-top:var(--sp-2);">No specific contraindications were found for this combination of patient profile and planned procedure. Standard pre-procedure protocols apply.</p>
+                        <p style="margin-top:var(--sp-3);color:var(--text-muted);font-size:.8125rem;">The full product will cross-reference over 150,000 medications against comprehensive procedure risk databases, allergy cross-reactivity data, and NICE guidelines, covering scenarios this demo cannot. <strong>Sign up below for early access.</strong></p>
+                    </div>
+                </div>
+            </div>`;
+    },
+
+    reset() {
+        for (const [id, state] of Object.entries(this.multiSelects)) {
+            state.selected = [];
+            const container = document.getElementById(id);
+            if (container) {
+                container.querySelectorAll('.tag').forEach(t => t.remove());
+                const input = container.querySelector('input[type="text"]');
+                if (input) input.value = '';
+            }
+        }
+
+        this.selectedProcedure = null;
+        document.querySelectorAll('.procedure-option').forEach(o => o.classList.remove('selected'));
+        document.querySelectorAll('input[name="procedure"]').forEach(r => r.checked = false);
+        const nextBtn = document.getElementById('step2-next');
+        if (nextBtn) nextBtn.disabled = true;
+
+        Tracking.updateDemoState('medications', []);
+        Tracking.updateDemoState('conditions', []);
+        Tracking.updateDemoState('allergies', []);
+        Tracking.updateDemoState('procedure', '');
+        Tracking.updateDemoState('riskLevel', '');
+
+        this.goToStep(1);
+    },
+};
+
+
+/* Scroll spy for side navigation */
+function initScrollSpy() {
+    const sideLinks = document.querySelectorAll('.side-nav a');
+    const sections = ['intro', 'demo', 'survey', 'waitlist'].map(id => document.getElementById(id)).filter(Boolean);
+
+    if (!sideLinks.length || !sections.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                sideLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                });
+            }
+        });
+    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(section => observer.observe(section));
+}
+
+/* Drag-to-rank feature ranking */
+function initDragRanking() {
+    const list = document.getElementById('ranking-list');
+    if (!list) return;
+
+    let dragItem = null;
+    let insertPosition = null; // { slot, side: 'before'|'after' }
+
+    function clearIndicators() {
+        list.querySelectorAll('.ranking-slot').forEach(s => s.classList.remove('insert-before', 'insert-after'));
+    }
+
+    // Work out insert index: line appears AFTER the returned slot
+    function getInsertSlot(targetItem, clientY) {
+        const slot = targetItem.closest('.ranking-slot');
+        if (!slot) return null;
+        const slots = [...list.querySelectorAll('.ranking-slot')];
+        const idx = slots.indexOf(slot);
+        const rect = slot.getBoundingClientRect();
+        const mid = rect.top + rect.height / 2;
+        // Top half: show line above this slot (i.e. after previous slot)
+        if (clientY < mid && idx > 0) return slots[idx - 1];
+        // Bottom half: show line below this slot
+        return slot;
+    }
+
+    // Move item: insertAfterSlot is the slot the line is drawn after
+    function moveToPosition() {
+        if (!dragItem || !insertPosition) return;
+        const slots = [...list.querySelectorAll('.ranking-slot')];
+        const items = slots.map(s => s.querySelector('.ranking-item'));
+        const fromIdx = items.indexOf(dragItem);
+        let toIdx = slots.indexOf(insertPosition) + 1; // insert after this slot
+        if (fromIdx === -1 || toIdx === -1) return;
+        if (fromIdx < toIdx) toIdx--;
+        if (fromIdx === toIdx) return;
+
+        items.splice(fromIdx, 1);
+        items.splice(toIdx, 0, dragItem);
+        slots.forEach((slot, i) => slot.appendChild(items[i]));
+    }
+
+    list.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (!dragItem) return;
+        e.dataTransfer.dropEffect = 'move';
+
+        clearIndicators();
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        const targetItem = target?.closest('.ranking-item');
+        if (targetItem && targetItem !== dragItem) {
+            const slot = getInsertSlot(targetItem, e.clientY);
+            if (slot) {
+                insertPosition = slot;
+                slot.classList.add('insert-after');
+            }
+        }
+    });
+
+    list.addEventListener('drop', (e) => {
+        e.preventDefault();
+        moveToPosition();
+        clearIndicators();
+    });
+
+    list.querySelectorAll('.ranking-item').forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+            dragItem = item;
+            item.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', '');
+        });
+
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            clearIndicators();
+            dragItem = null;
+            insertPosition = null;
+        });
+
+        // Touch support for mobile
+        item.addEventListener('touchstart', (e) => {
+            dragItem = item;
+            item.classList.add('dragging');
+        }, { passive: true });
+
+        item.addEventListener('touchmove', (e) => {
+            if (!dragItem) return;
+            e.preventDefault();
+            clearIndicators();
+            const target = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+            const targetItem = target?.closest('.ranking-item');
+            if (targetItem && targetItem !== dragItem) {
+                const slot = getInsertSlot(targetItem, e.touches[0].clientY);
+                if (slot) {
+                    insertPosition = slot;
+                    slot.classList.add('insert-after');
+                }
+            }
+        }, { passive: false });
+
+        item.addEventListener('touchend', (e) => {
+            if (!dragItem) return;
+            moveToPosition();
+            clearIndicators();
+            list.querySelectorAll('.ranking-item').forEach(i => i.classList.remove('dragging'));
+            dragItem = null;
+            insertPosition = null;
+        });
+    });
+}
+
+/* Initialise everything on DOM ready */
+document.addEventListener('DOMContentLoaded', () => {
+    Tracking.init();
+    Demo.init();
+    Forms.init();
+    initScrollSpy();
+    initDragRanking();
+});
+</script>
+</body>
+</html>
