@@ -1241,7 +1241,7 @@ const Tracking = {
 /* Form submission — posts to Google Apps Script webhook. */
 
 const Forms = {
-    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbzjME_m544mhHg60sTPiI9pbzjOb9wqWuySeO-d96lug9MwvsPCgM5c46HqsBN-NYFITg/exec',
+    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbyvEeoiX40RpzlFkTipMowLzMwKJLiysATW-i44YLcbl_WnL-tL6FK9TcZBGRrQWltXhg/exec',
 
     init() {
         this.initSurveyForm();
@@ -1317,16 +1317,17 @@ const Forms = {
         }
 
         try {
-            await fetch(this.WEBHOOK_URL, {
+            const resp = await fetch(this.WEBHOOK_URL, {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(payload),
             });
-            return true;
+            const result = await resp.json();
+            console.log('[Form submitted]', result);
+            return result.status === 'ok';
         } catch (err) {
             console.error('Form submission failed:', err);
-            return true;
+            return false;
         }
     },
 };
