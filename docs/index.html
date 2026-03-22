@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumplexity - Contraindication screening for private practice</title>
+
+    <!-- Google Analytics — replace G-XXXXXXXXXX with your measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -630,6 +640,7 @@ hr.section-break{display:none}
                 </div>
 
                 <!-- Hidden tracking fields -->
+                <input type="hidden" name="form_type" value="survey">
                 <input type="hidden" id="hidden-medications" name="demo_medications">
                 <input type="hidden" id="hidden-conditions" name="demo_conditions">
                 <input type="hidden" id="hidden-allergies" name="demo_allergies">
@@ -1277,6 +1288,7 @@ const Forms = {
             btn.textContent = 'Submit feedback';
 
             if (success) {
+                if (typeof gtag === 'function') gtag('event', 'survey_submitted', { practice_type: payload.practice_type || '' });
                 form.style.display = 'none';
                 document.getElementById('survey-success')?.classList.add('show');
             }
@@ -1304,6 +1316,7 @@ const Forms = {
             btn.textContent = 'Join waitlist';
 
             if (success) {
+                if (typeof gtag === 'function') gtag('event', 'waitlist_joined');
                 form.style.display = 'none';
                 document.getElementById('waitlist-success')?.classList.add('show');
             }
@@ -1603,8 +1616,14 @@ const Demo = {
         });
     },
 
+    trackEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, params);
+    },
+
     goToStep(step) {
         this.currentStep = step;
+        const stepNames = { 1: 'patient_profile', 2: 'procedure_selection', 3: 'risk_assessment' };
+        this.trackEvent('demo_step', { step_name: stepNames[step] || step });
 
         document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
         document.getElementById(`step-${step}`)?.classList.add('active');
@@ -1666,6 +1685,7 @@ const Demo = {
                     loadingEl.style.display = 'none';
                     const result = assessRisk(meds, conds, allergies, this.selectedProcedure);
                     Tracking.updateDemoState('riskLevel', result.overallRisk);
+                    this.trackEvent('risk_assessment_complete', { procedure: this.selectedProcedure, risk_level: result.overallRisk, findings_count: result.findings.length });
                     this.renderResult(result);
                     outputEl.style.display = 'block';
                     navEl.style.display = 'flex';
