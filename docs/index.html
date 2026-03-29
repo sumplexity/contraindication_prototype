@@ -605,8 +605,8 @@ hr.section-break{display:none}
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">How do you currently handle pre-procedure contraindication checks?</label>
-                    <select class="form-control" name="current_process">
+                    <label class="form-label">How do you currently handle pre-procedure contraindication checks? *</label>
+                    <select class="form-control" name="current_process" required>
                         <option value="">Select...</option>
                         <option value="manual_bnf">Manual BNF / SmPC lookup each time</option>
                         <option value="mental_checklist">From memory / mental checklist</option>
@@ -619,8 +619,8 @@ hr.section-break{display:none}
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">How long does a typical pre-procedure check take you today?</label>
-                    <select class="form-control" name="check_duration">
+                    <label class="form-label">How long does a typical pre-procedure check take you today? *</label>
+                    <select class="form-control" name="check_duration" required>
                         <option value="">Select...</option>
                         <option value="under_2min">Under 2 minutes</option>
                         <option value="2_5min">2 to 5 minutes</option>
@@ -632,8 +632,8 @@ hr.section-break{display:none}
 
                 <div class="survey-grid">
                     <div class="form-group">
-                        <label class="form-label">Practice type</label>
-                        <select class="form-control" name="practice_type">
+                        <label class="form-label">Practice type *</label>
+                        <select class="form-control" name="practice_type" required>
                             <option value="">Select...</option>
                             <option value="aesthetic_injectables">Aesthetic clinic (injectables)</option>
                             <option value="aesthetic_laser">Aesthetic clinic (laser/energy)</option>
@@ -643,8 +643,8 @@ hr.section-break{display:none}
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Practice size</label>
-                        <select class="form-control" name="practice_size">
+                        <label class="form-label">Practice size *</label>
+                        <select class="form-control" name="practice_size" required>
                             <option value="">Select...</option>
                             <option value="solo">Solo practitioner</option>
                             <option value="small">2 to 5 practitioners</option>
@@ -655,12 +655,12 @@ hr.section-break{display:none}
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Practice / clinic name</label>
-                    <input type="text" name="practice_name" class="form-control" placeholder="e.g. Cambridge Laser Clinic" required>
+                    <label class="form-label">Practice / clinic name *</label>
+                    <input type="text" name="practice_name" class="form-control" placeholder="Cosmetic Clinic Co." required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">What is your biggest concern about pre-procedure safety?</label>
+                    <label class="form-label">What is your biggest concern about pre-procedure safety? *</label>
                     <textarea class="form-control" name="safety_concern" rows="3" placeholder="e.g. keeping up with new medications, audit trail for insurance, time pressure between appointments..." required></textarea>
                 </div>
 
