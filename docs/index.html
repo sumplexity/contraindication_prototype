@@ -370,7 +370,7 @@ hr.section-break{display:none}
 <!-- ===== HERO + STATS ===== -->
 <section id="intro" class="hero-section">
     <h1 class="hero-headline">Treatments are getting more complex. Patient histories are getting longer. Your pre-procedure check shouldn't be a manual lookup.</h1>
-    <p class="hero-sub">From messy GP records to structured, source-backed risk assessments in seconds. Auditable evidence your practice can act on — and defend.</p>
+    <p class="hero-sub">From messy GP records to structured, source-backed risk assessments in seconds. Auditable evidence your practice can act on, and defend.</p>
     <div class="hero-cta">
         <a href="#demo" class="btn btn-primary btn-lg">Try the tool</a>
     </div>
@@ -479,7 +479,7 @@ hr.section-break{display:none}
                 <div id="followup-container" style="display:none;margin-bottom:var(--sp-4);"></div>
 
                 <div id="illustrative-banner" style="display:none;margin-bottom:var(--sp-4);padding:var(--sp-4);background:var(--info-light);border-radius:var(--radius-md);border-left:3px solid var(--info);font-size:.8125rem;color:var(--info-text);line-height:1.55;">
-                    This prototype demonstrates the tool's capabilities using curated clinical scenarios. Findings are illustrative — the full product assesses against comprehensive BNF, NICE, and SmPC databases in real time.
+                    This prototype demonstrates the tool's capabilities using curated clinical scenarios. Findings are illustrative - the full product assesses against comprehensive BNF, NICE, and SmPC databases in real time.
                 </div>
 
                 <div id="step1-nav" class="demo-nav" style="justify-content:flex-end;display:none;">
@@ -531,9 +531,9 @@ hr.section-break{display:none}
             <span class="app-panel-title">Help build the tool your practice needs</span>
         </div>
         <div class="app-panel-body">
-            <p style="margin-bottom:var(--sp-6);font-size:.875rem;color:var(--text-secondary);">Every practice runs differently. Tell us where you spend the most time, carry the most risk, or feel the most exposed — so we build what actually matters to yours.</p>
+            <p style="margin-bottom:var(--sp-6);font-size:.875rem;color:var(--text-secondary);">Every practice runs differently. Tell us where you spend the most time, carry the most risk, or feel the most exposed - so we build what actually matters to yours.</p>
 
-            <form id="survey-form">
+            <form id="survey-form" novalidate>
                 <div class="form-group">
                     <label class="form-label">Drag to rank the features that matter most</label>
                     <p class="form-hint" style="margin-bottom:var(--sp-3);">Drag features into your preferred order. Position 1 = most important.</p>
@@ -561,73 +561,24 @@ hr.section-break{display:none}
                         </div>
                         <div class="ranking-slot">
                             <div class="ranking-slot-number">4</div>
-                            <div class="ranking-item" draggable="true" data-feature="followup_questions">
-                                <div class="ranking-handle"><span></span><span></span><span></span></div>
-                                <span class="ranking-label">AI-generated follow-up questions for admin team</span>
-                            </div>
-                        </div>
-                        <div class="ranking-slot">
-                            <div class="ranking-slot-number">5</div>
-                            <div class="ranking-item" draggable="true" data-feature="gp_confirmation">
-                                <div class="ranking-handle"><span></span><span></span><span></span></div>
-                                <span class="ranking-label">GP confirmation form generation</span>
-                            </div>
-                        </div>
-                        <div class="ranking-slot">
-                            <div class="ranking-slot-number">6</div>
                             <div class="ranking-item" draggable="true" data-feature="audit_compliance">
                                 <div class="ranking-handle"><span></span><span></span><span></span></div>
                                 <span class="ranking-label">Audit trail and compliance documentation</span>
                             </div>
                         </div>
                         <div class="ranking-slot">
-                            <div class="ranking-slot-number">7</div>
+                            <div class="ranking-slot-number">5</div>
                             <div class="ranking-item" draggable="true" data-feature="patient_portal">
                                 <div class="ranking-handle"><span></span><span></span><span></span></div>
                                 <span class="ranking-label">Patient self-service portal</span>
-                            </div>
-                        </div>
-                        <div class="ranking-slot">
-                            <div class="ranking-slot-number">8</div>
-                            <div class="ranking-item" draggable="true" data-feature="pms_integration">
-                                <div class="ranking-handle"><span></span><span></span><span></span></div>
-                                <span class="ranking-label">Practice management software integration (Cliniko, Pabau, etc.)</span>
-                            </div>
-                        </div>
-                        <div class="ranking-slot">
-                            <div class="ranking-slot-number">9</div>
-                            <div class="ranking-item" draggable="true" data-feature="multi_language">
-                                <div class="ranking-handle"><span></span><span></span><span></span></div>
-                                <span class="ranking-label">Multi-language support</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">How do you currently handle pre-procedure contraindication checks? *</label>
-                    <select class="form-control" name="current_process" required>
-                        <option value="">Select...</option>
-                        <option value="manual_bnf">Manual BNF / SmPC lookup each time</option>
-                        <option value="mental_checklist">From memory / mental checklist</option>
-                        <option value="paper_protocol">Paper-based protocol or checklist</option>
-                        <option value="pms_built_in">Built into our practice management software</option>
-                        <option value="delegate_pharmacist">Delegate to pharmacist or prescriber</option>
-                        <option value="no_formal">No formal process in place</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">How long does a typical pre-procedure check take you today? *</label>
-                    <select class="form-control" name="check_duration" required>
-                        <option value="">Select...</option>
-                        <option value="under_2min">Under 2 minutes</option>
-                        <option value="2_5min">2 to 5 minutes</option>
-                        <option value="5_15min">5 to 15 minutes</option>
-                        <option value="15_plus">15+ minutes</option>
-                        <option value="varies">Varies significantly by patient</option>
-                    </select>
+                    <label class="form-label">Practice / clinic name *</label>
+                    <input type="text" name="practice_name" class="form-control" placeholder="Cosmetic Clinic Co." required>
                 </div>
 
                 <div class="survey-grid">
@@ -641,10 +592,11 @@ hr.section-break{display:none}
                             <option value="multi_treatment">Multi-treatment clinic</option>
                             <option value="other">Other</option>
                         </select>
+                        <input type="text" name="practice_type_other" class="form-control other-specify" placeholder="Please specify..." style="display:none;margin-top:var(--sp-2);">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Practice size *</label>
-                        <select class="form-control" name="practice_size" required>
+                        <label class="form-label">Practice size</label>
+                        <select class="form-control" name="practice_size">
                             <option value="">Select...</option>
                             <option value="solo">Solo practitioner</option>
                             <option value="small">2 to 5 practitioners</option>
@@ -655,13 +607,35 @@ hr.section-break{display:none}
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Practice / clinic name *</label>
-                    <input type="text" name="practice_name" class="form-control" placeholder="Cosmetic Clinic Co." required>
+                    <label class="form-label">What is your biggest concern about pre-procedure safety? *</label>
+                    <textarea class="form-control" name="safety_concern" rows="3" placeholder="e.g. keeping up with new medications, audit trail for insurance, time pressure between appointments..." required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">What is your biggest concern about pre-procedure safety? *</label>
-                    <textarea class="form-control" name="safety_concern" rows="3" placeholder="e.g. keeping up with new medications, audit trail for insurance, time pressure between appointments..." required></textarea>
+                    <label class="form-label">How do you currently handle pre-procedure contraindication checks?</label>
+                    <select class="form-control" name="current_process">
+                        <option value="">Select...</option>
+                        <option value="manual_bnf">Manual BNF / SmPC lookup each time</option>
+                        <option value="mental_checklist">From memory / mental checklist</option>
+                        <option value="paper_protocol">Paper-based protocol or checklist</option>
+                        <option value="pms_built_in">Built into our practice management software</option>
+                        <option value="delegate_pharmacist">Delegate to pharmacist or prescriber</option>
+                        <option value="no_formal">No formal process in place</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="text" name="current_process_other" class="form-control other-specify" placeholder="Please specify..." style="display:none;margin-top:var(--sp-2);">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How long does a typical pre-procedure check take you today?</label>
+                    <select class="form-control" name="check_duration">
+                        <option value="">Select...</option>
+                        <option value="under_2min">Under 2 minutes</option>
+                        <option value="2_5min">2 to 5 minutes</option>
+                        <option value="5_15min">5 to 15 minutes</option>
+                        <option value="15_plus">15+ minutes</option>
+                        <option value="varies">Varies significantly by patient</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -693,7 +667,7 @@ hr.section-break{display:none}
             </div>
 
             <div class="waitlist-inline" style="margin-top:var(--sp-8);padding-top:var(--sp-6);border-top:1px solid var(--border-light);">
-                <h4 style="font-size:1rem;font-weight:700;margin-bottom:var(--sp-2);">Join early access — shape what we build to what you need</h4>
+                <h4 style="font-size:1rem;font-weight:700;margin-bottom:var(--sp-2);">Join early access - shape what we build to what you need</h4>
                 <form id="waitlist-form" style="display:flex;gap:var(--sp-2);max-width:480px;">
                     <input type="email" name="email" class="form-control" placeholder="you@practice.co.uk" required style="flex:1;">
                     <input type="hidden" name="form_type" value="waitlist">
@@ -882,7 +856,7 @@ const SCENARIOS = [
         procedureTag: 'skinSurface',
         severity: 'critical',
         category: 'Drug-procedure contraindication',
-        plainEnglish: 'Roaccutane thins the skin and prevents proper healing \u2014 skin procedures are unsafe until at least 6 months after stopping.',
+        plainEnglish: 'Roaccutane thins the skin and prevents proper healing - skin procedures are unsafe until at least 6 months after stopping.',
         explanation: 'Isotretinoin causes significant thinning of the epidermis and impairs wound healing by reducing sebaceous gland activity and altering collagen synthesis. Skin procedures during or shortly after isotretinoin use carry high risk of abnormal scarring, delayed healing, and post-inflammatory hyperpigmentation.',
         recommendations: [
             'Absolute contraindication: discontinue isotretinoin at least 6 months before any ablative skin procedure',
@@ -981,11 +955,11 @@ const SCENARIOS = [
         explanation: 'SSRIs inhibit serotonin reuptake in platelets, impairing platelet aggregation and prolonging bleeding time. This increases the risk of bruising, haematoma, and prolonged bleeding during injectable and surgical procedures. The effect is additive with other antiplatelet or anticoagulant medications.',
         recommendations: [
             'Inform patient of increased bruising and bleeding risk',
-            'Do not advise discontinuation of SSRIs without prescriber approval \u2014 withdrawal risks may outweigh procedural bleeding risk',
+            'Do not advise discontinuation of SSRIs without prescriber approval - withdrawal risks may outweigh procedural bleeding risk',
             'Avoid concurrent NSAID use in the peri-procedural period',
             'Apply extended pressure to injection/incision sites',
             'Schedule post-procedure review to monitor for haematoma',
-            'If patient is also on anticoagulants, treat as high-risk \u2014 seek haematology advice',
+            'If patient is also on anticoagulants, treat as high-risk - seek haematology advice',
         ],
     },
     {
@@ -1017,7 +991,7 @@ const SCENARIOS = [
         procedureTag: 'woundHealing',
         severity: 'attention',
         category: 'Condition-procedure risk factor',
-        plainEnglish: 'Diabetes slows wound healing and increases infection risk \u2014 blood sugar must be well-controlled before proceeding.',
+        plainEnglish: 'Diabetes slows wound healing and increases infection risk - blood sugar must be well-controlled before proceeding.',
         explanation: 'Diabetes impairs wound healing through multiple pathways: reduced blood flow, neuropathy, and impaired immune response. Poorly controlled diabetes (HbA1c >8.5%) significantly increases risk of post-operative infection, delayed healing, and surgical complications.',
         recommendations: [
             'Check HbA1c within 3 months pre-procedure. Defer if >8.5% without physician approval',
@@ -1037,7 +1011,7 @@ const SCENARIOS = [
         procedureTag: 'bleedingRisk',
         severity: 'critical',
         category: 'Condition-procedure contraindication',
-        plainEnglish: 'A bleeding disorder means the body cannot stop bleeding normally \u2014 specialist input is essential before any invasive procedure.',
+        plainEnglish: 'A bleeding disorder means the body cannot stop bleeding normally - specialist input is essential before any invasive procedure.',
         explanation: 'Inherited or acquired bleeding disorders significantly increase the risk of uncontrolled bleeding, haematoma, and post-operative haemorrhage during any invasive procedure. Severity depends on the specific disorder and factor levels.',
         recommendations: [
             'Obtain haematology consultation and recent clotting profile before proceeding',
@@ -1057,7 +1031,7 @@ const SCENARIOS = [
         procedureTag: 'localAnaesthetic',
         severity: 'critical',
         category: 'Allergy-procedure contraindication',
-        plainEnglish: 'An allergy to local anaesthetic means the standard numbing agent cannot be used \u2014 alternatives must be arranged.',
+        plainEnglish: 'An allergy to local anaesthetic means the standard numbing agent cannot be used - alternatives must be arranged.',
         explanation: 'Documented allergy to amide-group local anaesthetics (lidocaine, prilocaine, bupivacaine) contraindicates the use of all anaesthetics in this class. Cross-reactivity within the amide group is possible. True allergy vs. vasovagal response or adrenaline reaction must be distinguished.',
         recommendations: [
             'Do not administer any amide-group local anaesthetic without allergy testing',
@@ -1137,7 +1111,7 @@ const SCENARIOS = [
         procedureTag: 'skinSurface',
         severity: 'attention',
         category: 'Drug-procedure interaction',
-        plainEnglish: 'Skin creams containing retinoids make the skin thinner and more sensitive \u2014 procedures can cause burns or excessive peeling.',
+        plainEnglish: 'Skin creams containing retinoids make the skin thinner and more sensitive - procedures can cause burns or excessive peeling.',
         explanation: 'Topical retinoids increase skin cell turnover and thin the stratum corneum, making skin more vulnerable to chemical and mechanical disruption. This increases the risk of burns, excessive peeling, and post-inflammatory hyperpigmentation from skin-surface procedures.',
         recommendations: [
             'Discontinue topical retinoid 5\u20137 days before procedure',
@@ -1156,15 +1130,15 @@ const SCENARIOS = [
         procedureTag: 'surgical',
         severity: 'critical',
         category: 'Drug-procedure contraindication',
-        plainEnglish: 'Weight loss injections like Ozempic slow digestion, creating a serious choking risk under anaesthesia \u2014 even after normal fasting.',
-        explanation: 'GLP-1 receptor agonists (semaglutide, tirzepatide) cause delayed gastric emptying. Patients may retain solid gastric contents despite following standard pre-operative fasting guidelines. This significantly increases the risk of pulmonary aspiration during sedation or general anaesthesia \u2014 a potentially fatal complication. The American Society of Anesthesiologists recommends cessation prior to elective procedures.',
+        plainEnglish: 'Weight loss injections like Ozempic slow digestion, creating a serious choking risk under anaesthesia - even after normal fasting.',
+        explanation: 'GLP-1 receptor agonists (semaglutide, tirzepatide) cause delayed gastric emptying. Patients may retain solid gastric contents despite following standard pre-operative fasting guidelines. This significantly increases the risk of pulmonary aspiration during sedation or general anaesthesia - a potentially fatal complication. The American Society of Anesthesiologists recommends cessation prior to elective procedures.',
         recommendations: [
             'For weekly GLP-1 dosing (e.g. Ozempic): discontinue at least 7 days before procedure',
             'For daily GLP-1 dosing: discontinue the day before procedure',
             'Consider extended fasting period (24+ hours) if medication cannot be stopped in time',
             'Perform point-of-care gastric ultrasound before induction if available',
             'If significant gastric contents are found, defer the procedure',
-            'Many patients do not volunteer GLP-1 use \u2014 screen specifically for weight loss medications',
+            'Many patients do not volunteer GLP-1 use - screen specifically for weight loss medications',
             'Inform patient\'s prescribing GP of the planned procedure and cessation requirement',
         ],
     },
@@ -1313,35 +1287,106 @@ const Tracking = {
 /* Form submission — posts to Google Apps Script webhook. */
 
 const Forms = {
-    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbzbj4Fd9qxMEV57Uaaj2ViEUp9XPNU8wrvRjC8dj7ReU0XcJKZNz85Df7wCerBzO7m_5w/exec',
+    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbwGMOijeJbAPH5Dw1id37slOapEGBft026XgL6L_XfNVQNkrtud1ZbCU9Jy5poVksC9UA/exec',
+    sessionId: Math.random().toString(36).slice(2) + Date.now().toString(36),
+    partialSaveTimer: null,
+    surveySubmitted: false,
 
     init() {
         this.initSurveyForm();
         this.initWaitlistForm();
     },
 
+    getSurveyPayload() {
+        const form = document.getElementById('survey-form');
+        if (!form) return {};
+        const data = new FormData(form);
+        const payload = Object.fromEntries(data.entries());
+        const rankings = {};
+        document.querySelectorAll('#ranking-list .ranking-slot').forEach((slot, idx) => {
+            const item = slot.querySelector('.ranking-item');
+            if (item) rankings[item.dataset.feature] = idx + 1;
+        });
+        payload.feature_rankings = rankings;
+        Object.assign(payload, Tracking.getSubmissionData());
+        payload.session_id = this.sessionId;
+        return payload;
+    },
+
+    savePartial() {
+        if (this.surveySubmitted) return;
+        const payload = this.getSurveyPayload();
+        // Only save if they've started filling in (at least one field has content)
+        const hasContent = payload.practice_name || payload.safety_concern || payload.practice_type || payload.email;
+        if (!hasContent) return;
+        payload.form_type = 'partial';
+        this.submit(payload);
+    },
+
+    startPartialSaveTracking() {
+        const form = document.getElementById('survey-form');
+        if (!form) return;
+        let started = false;
+        form.addEventListener('input', () => {
+            if (started) return;
+            started = true;
+            // Save on page unload
+            window.addEventListener('beforeunload', () => this.savePartial());
+            // Also save every 30s after first interaction
+            this.partialSaveTimer = setInterval(() => this.savePartial(), 30000);
+        });
+    },
+
+    validateSurvey() {
+        const form = document.getElementById('survey-form');
+        const required = form.querySelectorAll('[required]');
+        let allValid = true;
+        // Clear previous error states
+        form.querySelectorAll('.field-error').forEach(el => el.remove());
+        form.querySelectorAll('.form-control').forEach(el => el.style.borderColor = '');
+
+        required.forEach(field => {
+            if (!field.value || field.value.trim() === '') {
+                allValid = false;
+                field.style.borderColor = 'var(--danger)';
+                if (!field.parentElement.querySelector('.field-error')) {
+                    const err = document.createElement('span');
+                    err.className = 'field-error';
+                    err.style.cssText = 'color:var(--danger);font-size:.75rem;margin-top:var(--sp-1);display:block;';
+                    err.textContent = 'This field is required';
+                    field.insertAdjacentElement('afterend', err);
+                }
+                field.addEventListener('input', function handler() {
+                    field.style.borderColor = '';
+                    const errEl = field.parentElement.querySelector('.field-error');
+                    if (errEl) errEl.remove();
+                    field.removeEventListener('input', handler);
+                }, { once: true });
+                field.addEventListener('change', function handler() {
+                    field.style.borderColor = '';
+                    const errEl = field.parentElement.querySelector('.field-error');
+                    if (errEl) errEl.remove();
+                    field.removeEventListener('change', handler);
+                }, { once: true });
+            }
+        });
+        return allValid;
+    },
+
     initSurveyForm() {
         const form = document.getElementById('survey-form');
         if (!form) return;
+        this.startPartialSaveTracking();
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!this.validateSurvey()) return;
+
             const btn = form.querySelector('button[type="submit"]');
             btn.classList.add('loading');
             btn.innerHTML = '<span class="spinner"></span>Submitting';
 
-            const data = new FormData(form);
-            const payload = Object.fromEntries(data.entries());
-
-            const rankings = {};
-            document.querySelectorAll('#ranking-list .ranking-slot').forEach((slot, idx) => {
-                const item = slot.querySelector('.ranking-item');
-                if (item) rankings[item.dataset.feature] = idx + 1;
-            });
-            payload.feature_rankings = rankings;
-
-            const trackingData = Tracking.getSubmissionData();
-            Object.assign(payload, trackingData);
+            const payload = this.getSurveyPayload();
 
             const success = await this.submit(payload);
 
@@ -1349,6 +1394,8 @@ const Forms = {
             btn.textContent = 'Submit feedback';
 
             if (success) {
+                this.surveySubmitted = true;
+                clearInterval(this.partialSaveTimer);
                 if (typeof gtag === 'function') gtag('event', 'survey_submitted', { practice_type: payload.practice_type || '' });
                 form.style.display = 'none';
                 document.getElementById('survey-success')?.classList.add('show');
@@ -1611,14 +1658,14 @@ const Demo = {
         sarah: `<div class="raw-data-block raw-data-pharmacy"><img src="assets/pharmacy_printout.png" alt="Pharmacy printout for Sarah Mitchell"></div>`,
         james: `<div class="raw-data-block raw-data-email"><img src="assets/gp_email.png" alt="GP email referral for James Cooper"></div>`,
         lisa: `<div class="raw-data-block raw-data-transcript">
-            <div class="transcript-header">Consultation transcript — 28/03/2026 — Lisa Byrne, 42</div>
+            <div class="transcript-header">Consultation transcript - 28/03/2026 - Lisa Byrne, 42</div>
             <div class="transcript-msg">
                 <div class="transcript-avatar practitioner">PR</div>
                 <div class="transcript-bubble practitioner"><div class="bubble-name">Practitioner</div><span class="bubble-speech">What medications are you currently taking?</span></div>
             </div>
             <div class="transcript-msg">
                 <div class="transcript-avatar patient">LB</div>
-                <div class="transcript-bubble patient"><div class="bubble-name">Lisa Byrne</div><span class="bubble-speech">I'm on Ozempic, the weekly injection — I've been on it about 6 months now for weight loss. My GP prescribed it. I'm also taking the pill, Cerelle I think it's called.</span></div>
+                <div class="transcript-bubble patient"><div class="bubble-name">Lisa Byrne</div><span class="bubble-speech">I'm on Ozempic, the weekly injection. I've been on it about 6 months now for weight loss. My GP prescribed it. I'm also taking the pill, Cerelle I think it's called.</span></div>
             </div>
             <div class="transcript-msg">
                 <div class="transcript-avatar practitioner">PR</div>
@@ -1634,7 +1681,7 @@ const Demo = {
             </div>
             <div class="transcript-msg">
                 <div class="transcript-avatar patient">LB</div>
-                <div class="transcript-bubble patient"><div class="bubble-name">Lisa Byrne</div><span class="bubble-speech">Not that I know of. Actually wait — I had a reaction to some plasters once, they made my skin go red and itchy. Does that count?</span></div>
+                <div class="transcript-bubble patient"><div class="bubble-name">Lisa Byrne</div><span class="bubble-speech">Not that I know of. Actually wait, I had a reaction to some plasters once, they made my skin go red and itchy. Does that count?</span></div>
             </div>
             <div class="transcript-msg">
                 <div class="transcript-avatar practitioner">PR</div>
@@ -1651,11 +1698,11 @@ const Demo = {
     followUpQuestions: {
         sarah: [
             "Patient's INR was last checked on [date unknown]. Recommend INR check within 24 hours of any invasive procedure.",
-            "Warfarin and atorvastatin can interact — confirm current INR is stable and within target range (2\u20133).",
+            "Warfarin and atorvastatin can interact. Confirm current INR is stable and within target range (2\u20133).",
         ],
         james: [
             "Isotretinoin course started approximately 4 months ago. Confirm exact start date and expected end date with prescribing dermatologist.",
-            "Patient mentioned interest in scarring treatments — confirm isotretinoin has been discontinued for at least 6 months before any skin resurfacing procedure.",
+            "Patient mentioned interest in scarring treatments. Confirm isotretinoin has been discontinued for at least 6 months before any skin resurfacing procedure.",
         ],
         lisa: [
             "Patient reports plaster adhesive reaction. Clarify: was this a local skin irritation or a systemic allergic response? Consider patch testing if unclear.",
@@ -1833,7 +1880,7 @@ const Demo = {
             document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             // Hide raw data and button
-            this.setInstruction('Processing — turning the raw record into a structured patient profile...');
+            this.setInstruction('Processing - turning the raw record into a structured patient profile...');
             document.getElementById('raw-data-container').style.display = 'none';
             document.getElementById('process-btn-container').style.display = 'none';
 
@@ -2037,7 +2084,7 @@ const Demo = {
 
         const illustrativeBannerHtml = this.userModified ? `
                 <div style="margin-bottom:var(--sp-4);padding:var(--sp-4);background:var(--info-light);border-radius:var(--radius-md);border-left:3px solid var(--info);font-size:.8125rem;color:var(--info-text);line-height:1.55;">
-                    This prototype demonstrates the tool's capabilities using curated clinical scenarios. Findings are illustrative — the full product assesses against comprehensive BNF, NICE, and SmPC databases in real time.
+                    This prototype demonstrates the tool's capabilities using curated clinical scenarios. Findings are illustrative - the full product assesses against comprehensive BNF, NICE, and SmPC databases in real time.
                 </div>` : '';
 
         let html = `
@@ -2143,7 +2190,7 @@ const Demo = {
                     <svg style="width:24px;height:24px;color:var(--brand-green);" viewBox="0 0 20 20" fill="currentColor"><path d="M18 10c0 3.866-3.582 7-8 7a8.84 8.84 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0H9v2h2V9z"/></svg>
                 </div>
                 <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:var(--sp-2);">Help shape the future of pre-procedure safety</h3>
-                <p style="font-size:.875rem;color:var(--text-secondary);line-height:1.55;margin-bottom:var(--sp-6);">We are building this with early practitioners, not for them. Tell us what would cut the most risk, time, and cost for your practice — this is your window to shape what the tool becomes.</p>
+                <p style="font-size:.875rem;color:var(--text-secondary);line-height:1.55;margin-bottom:var(--sp-6);">We are building this with early practitioners, not for them. Tell us what would cut the most risk, time, and cost for your practice. This is your window to shape what the tool becomes.</p>
                 <div style="display:flex;gap:var(--sp-3);justify-content:center;">
                     <button id="feedback-dismiss" class="btn btn-ghost">Maybe later</button>
                     <a href="#survey" id="feedback-go" class="btn btn-primary">Shape the product</a>
@@ -2165,7 +2212,7 @@ const Demo = {
                     <svg style="width:24px;height:24px;color:var(--amber-gold);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
                 </div>
                 <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:var(--sp-3);">This demo covers a curated set of scenarios</h3>
-                <p style="font-size:.875rem;color:var(--text-secondary);line-height:1.55;margin-bottom:var(--sp-4);">We have configured this prototype with a selection of common patient-procedure combinations to demonstrate the tool's approach. Not every combination is wired up yet — the full product cross-references over 150,000 medications against comprehensive procedure risk databases, allergy profiles, and NICE guidelines.</p>
+                <p style="font-size:.875rem;color:var(--text-secondary);line-height:1.55;margin-bottom:var(--sp-4);">We have configured this prototype with a selection of common patient-procedure combinations to demonstrate the tool's approach. Not every combination is wired up yet. The full product cross-references over 150,000 medications against comprehensive procedure risk databases, allergy profiles, and NICE guidelines.</p>
                 <p style="font-size:.8125rem;color:var(--text-muted);line-height:1.5;margin-bottom:var(--sp-6);">Try one of the pre-set example patients for the best demonstration of what the tool does.</p>
                 <button id="fallback-overlay-close" class="btn btn-primary" style="min-width:160px;">Understood</button>
             </div>`;
@@ -2182,7 +2229,7 @@ const Demo = {
                     <div>
                         <strong>No known contraindications identified</strong>
                         <p style="margin-top:var(--sp-2);">No specific contraindications were found for this combination. Standard pre-procedure protocols apply.</p>
-                        <p style="margin-top:var(--sp-3);color:var(--text-muted);font-size:.8125rem;">This demo covers a curated set of scenarios. The full product checks against 150,000+ medications, giving your team complete confidence before every procedure — and a defensible audit trail if questions arise later. <strong>Sign up below for early access.</strong></p>
+                        <p style="margin-top:var(--sp-3);color:var(--text-muted);font-size:.8125rem;">This demo covers a curated set of scenarios. The full product checks against 150,000+ medications, giving your team complete confidence before every procedure, and a defensible audit trail if questions arise later. <strong>Sign up below for early access.</strong></p>
                     </div>
                 </div>
             </div>`;
@@ -2351,6 +2398,16 @@ document.addEventListener('DOMContentLoaded', () => {
     Forms.init();
     initScrollSpy();
     initDragRanking();
+
+    // Show/hide "Other" text fields
+    document.querySelectorAll('select').forEach(select => {
+        const otherInput = select.parentElement.querySelector('.other-specify');
+        if (!otherInput) return;
+        select.addEventListener('change', () => {
+            otherInput.style.display = select.value === 'other' ? 'block' : 'none';
+            if (select.value !== 'other') otherInput.value = '';
+        });
+    });
 });
 </script>
 </body>
