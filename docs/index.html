@@ -153,7 +153,13 @@ textarea.form-control{resize:vertical;min-height:80px}
 .stat-hero-card.coral .stat-hero-number{color:var(--warm-coral)}
 .stat-hero-card.amber .stat-hero-number{color:var(--amber-gold)}
 .stat-hero-card.navy .stat-hero-number{color:var(--deep-navy)}
-.stat-hero-label{font-size:.75rem;font-weight:500;color:var(--text-secondary)}
+.stat-hero-label{font-size:.75rem;font-weight:500;color:var(--text-secondary);margin-bottom:2px}
+.stat-hero-context{font-size:.6875rem;color:var(--text-muted);line-height:1.4}
+.stat-ref{position:relative;cursor:pointer;font-size:.6875rem;font-weight:600;vertical-align:super;margin-left:2px;opacity:.6;transition:opacity var(--ease-fast)}
+.stat-ref:hover{opacity:1}
+.stat-ref-tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--text-primary);color:#fff;font-size:.6875rem;font-weight:400;font-style:normal;line-height:1.45;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-md);white-space:normal;width:280px;box-shadow:var(--shadow-lg);z-index:100;text-align:left}
+.stat-ref-tooltip a{color:var(--highlight);text-decoration:underline}
+.stat-ref:hover .stat-ref-tooltip{display:block}
 .stat-hero-context{font-size:.8125rem;color:var(--text-muted);line-height:1.45}
 .hero-credibility{font-size:.8125rem;color:var(--text-faint);font-style:italic}
 
@@ -393,16 +399,19 @@ hr.section-break{display:none}
 
     <div class="stats-grid">
         <div class="stat-hero-card coral">
-            <div class="stat-hero-number">&pound;98.5M / year</div>
-            <div class="stat-hero-label">Avoidable adverse drug events in England</div>
+            <div class="stat-hero-number">&pound;98.5M / year<span class="stat-ref" data-ref="1">&#185;<span class="stat-ref-tooltip">Elliott et al., BMJ 2021. Prevalence and economic burden of medication errors in the NHS in England.<br><a href="https://bmj.com/content/bmj/375/bmj-2021-067764.full.pdf" target="_blank" rel="noopener">bmj.com</a></span></span></div>
+            <div class="stat-hero-label">Cost of avoidable adverse drug events in England</div>
+            <div class="stat-hero-context">A missed contraindication is the one thing you cannot defend in court</div>
         </div>
         <div class="stat-hero-card amber">
-            <div class="stat-hero-number">94%</div>
+            <div class="stat-hero-number">94%<span class="stat-ref" data-ref="2">&#178;<span class="stat-ref-tooltip">Hazell &amp; Shakir, Drug Safety 2006. Under-reporting of adverse drug reactions: a systematic review.<br><a href="https://doi.org/10.2165/00002018-200629050-00003" target="_blank" rel="noopener">doi.org</a></span></span></div>
             <div class="stat-hero-label">Of adverse events go unreported</div>
+            <div class="stat-hero-context">Half of NHS presentations from non-surgical complications required surgery</div>
         </div>
         <div class="stat-hero-card navy">
-            <div class="stat-hero-number">2026</div>
+            <div class="stat-hero-number">2026<span class="stat-ref" data-ref="3">&#179;<span class="stat-ref-tooltip">UK Government. Non-surgical cosmetic procedures: licensing framework.<br><a href="https://www.gov.uk/government/consultations/non-surgical-cosmetic-procedures-licensing" target="_blank" rel="noopener">gov.uk</a></span></span></div>
             <div class="stat-hero-label">New licensing enforcement begins</div>
+            <div class="stat-hero-context">Red/Amber/Green framework demands documented safety checks. Future-proof your practice now</div>
         </div>
     </div>
 
