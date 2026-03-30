@@ -157,9 +157,10 @@ textarea.form-control{resize:vertical;min-height:80px}
 .stat-hero-context{font-size:.6875rem;color:var(--text-muted);line-height:1.4}
 .stat-ref{position:relative;cursor:pointer;font-size:.6875rem;font-weight:600;vertical-align:super;margin-left:2px;opacity:.6;transition:opacity var(--ease-fast)}
 .stat-ref:hover{opacity:1}
-.stat-ref-tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--text-primary);color:#fff;font-size:.6875rem;font-weight:400;font-style:normal;line-height:1.45;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-md);white-space:normal;width:280px;box-shadow:var(--shadow-lg);z-index:100;text-align:left}
+.stat-ref-tooltip{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--text-primary);color:#fff;font-size:.6875rem;font-weight:400;font-style:normal;line-height:1.45;padding:var(--sp-3) var(--sp-3);border-radius:var(--radius-md);white-space:normal;width:280px;box-shadow:var(--shadow-lg);z-index:100;text-align:left;padding-bottom:var(--sp-4)}
+.stat-ref-tooltip::after{content:'';position:absolute;bottom:-8px;left:0;right:0;height:12px}
 .stat-ref-tooltip a{color:var(--highlight);text-decoration:underline}
-.stat-ref:hover .stat-ref-tooltip{display:block}
+.stat-ref:hover .stat-ref-tooltip,.stat-ref-tooltip:hover{display:block}
 .stat-hero-context{font-size:.8125rem;color:var(--text-muted);line-height:1.45}
 .hero-credibility{font-size:.8125rem;color:var(--text-faint);font-style:italic}
 
