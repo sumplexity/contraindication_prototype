@@ -37,7 +37,7 @@
     --ease-fast:120ms ease;--ease-normal:200ms ease;
     --font-sans:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --font-mono:'SF Mono','JetBrains Mono',Consolas,monospace;
-    --max-width:1200px;
+    --max-width:1440px;
     --warm-coral:#BF5A3A;--coral-light:#FAEAE6;--coral-text:#8B3D25;
     --teal:#0C7C6B;--teal-light:#E6F3F1;--teal-text:#085C50;
     --amber-gold:#C8952E;--amber-light:#FAF0DC;--amber-text:#8A6620;
@@ -76,7 +76,7 @@ p{margin-bottom:var(--sp-4);color:var(--text-secondary)}p:last-child{margin-bott
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 
 /* Forms */
-.form-label{display:block;margin-bottom:var(--sp-1);font-weight:500;font-size:.8125rem}
+.form-label{display:block;margin-bottom:var(--sp-1);font-weight:700;font-size:.8125rem}
 .form-control{width:100%;padding:var(--sp-2) var(--sp-3);border:1px solid var(--border-default);border-radius:var(--radius-md);font-family:var(--font-sans);font-size:.875rem;color:var(--text-primary);background:var(--bg-white);transition:all var(--ease-fast);line-height:1.5}
 .form-control::placeholder{color:var(--text-faint)}
 .form-control:focus{outline:none;border-color:var(--brand-green);box-shadow:0 0 0 3px rgba(10,77,28,.08)}
@@ -419,7 +419,8 @@ hr.section-break{display:none}
         <a href="#demo" class="btn btn-primary btn-lg">Try the tool</a>
     </div>
 
-    <p class="hero-sub" style="margin-top:var(--sp-4);margin-bottom:var(--sp-4);">We're producing personalised risk-and-opportunity profiles for a small number of practices. To be included, try the demo and tell us about your clinic in the survey below.</p>
+    <p style="margin-top:var(--sp-6);font-size:1.0625rem;font-weight:600;color:var(--brand-green);line-height:1.55;">We're producing <strong style="font-weight:800;">personalised risk-and-opportunity profiles</strong> for a small number of practices. To be included, try the demo and tell us about your clinic in the survey below.</p>
+
 </section>
 
 <!-- ===== DEMO PANEL ===== -->
@@ -609,9 +610,8 @@ hr.section-break{display:none}
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Practice website</label>
-                    <input type="text" name="practice_website" class="form-control" placeholder="www.yourclinic.co.uk">
-                    <span class="form-hint">Optional — helps us tailor your report</span>
+                    <label class="form-label">Practice website *</label>
+                    <input type="text" name="practice_website" class="form-control" placeholder="www.yourclinic.co.uk" required>
                 </div>
 
                 <div class="survey-grid">
@@ -682,7 +682,7 @@ hr.section-break{display:none}
                 </div>
 
                 <div class="form-group" id="email-group">
-                    <label class="form-label">Email <span id="email-optional-label">(optional)</span></label>
+                    <label class="form-label">Email <span id="email-optional-label"></span></label>
                     <input type="email" name="email" id="survey-email" class="form-control" placeholder="you@practice.co.uk">
                     <span class="form-hint">Required if you'd like your report or a call. We'll only use this for your report and early access.</span>
                 </div>
@@ -1330,7 +1330,7 @@ const Tracking = {
 /* Form submission — posts to Google Apps Script webhook. */
 
 const Forms = {
-    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbwGMOijeJbAPH5Dw1id37slOapEGBft026XgL6L_XfNVQNkrtud1ZbCU9Jy5poVksC9UA/exec',
+    WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbxHN_ywIb2OoCXOxrT8pJQ0iac1GCqlsLtbnS4NlJagrDR8Kjsb-ImO1rmWJj6rp9Tyew/exec',
     sessionId: Math.random().toString(36).slice(2) + Date.now().toString(36),
     partialSaveTimer: null,
     surveySubmitted: false,
@@ -1428,7 +1428,7 @@ const Forms = {
             optionalLabel.textContent = '*';
         } else {
             emailField.removeAttribute('required');
-            optionalLabel.textContent = '(optional)';
+            optionalLabel.textContent = '';
         }
         // Clear any existing error on the email field when toggling
         emailField.style.borderColor = '';
