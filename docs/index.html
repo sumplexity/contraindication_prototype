@@ -313,10 +313,6 @@ textarea.form-control{resize:vertical;min-height:80px}
 .site-footer{text-align:center;padding:var(--sp-6);font-size:.75rem;color:var(--text-faint)}
 
 /* Left sidebar navigation */
-.side-nav{position:fixed;left:var(--sp-4);top:100px;z-index:900;display:flex;flex-direction:column;gap:0;background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--sp-3) 0;box-shadow:var(--shadow-md)}
-.side-nav a{font-size:.75rem;color:var(--text-muted);text-decoration:none;padding:var(--sp-2) var(--sp-4);border-left:3px solid transparent;transition:all var(--ease-normal);line-height:1.4;display:block;white-space:nowrap}
-.side-nav a:hover{color:var(--text-primary);background:var(--bg-elevated)}
-.side-nav a.active{color:var(--brand-green);border-left-color:var(--brand-green);font-weight:600;background:var(--brand-green-subtle)}
 
 /* Section dividers */
 hr.section-break{display:none}
@@ -342,7 +338,6 @@ hr.section-break{display:none}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-    .side-nav{display:none}
     .stats-grid{grid-template-columns:1fr}
     .hero-headline{font-size:1.35rem}
     .hero-section{padding:var(--sp-8) var(--sp-4) var(--sp-6)}
@@ -370,11 +365,6 @@ hr.section-break{display:none}
     </div>
 </nav>
 
-<!-- ===== SIDE NAV ===== -->
-<nav class="side-nav">
-    <a href="#demo" class="active">The tool</a>
-    <a href="#survey">Shape the product</a>
-</nav>
 
 <!-- ===== CLARA BANNER ===== -->
 <!-- ===== HERO + STATS ===== -->
@@ -419,12 +409,12 @@ hr.section-break{display:none}
         <a href="#demo" class="btn btn-primary btn-lg">Try the tool</a>
     </div>
 
-    <p style="margin-top:var(--sp-6);font-size:1.0625rem;font-weight:600;color:var(--brand-green);line-height:1.55;">We're producing <strong style="font-weight:800;">personalised risk-and-opportunity profiles</strong> for a small number of practices. To be included, try the demo and tell us about your clinic in the survey below.</p>
+    <p id="demo" style="margin-top:var(--sp-6);font-size:1.0625rem;font-weight:600;color:var(--brand-green);line-height:1.55;">We're producing <strong style="font-weight:800;">personalised risk-and-opportunity profiles</strong> for a small number of practices. To be included, try the demo and tell us about your clinic in the survey below.</p>
 
 </section>
 
 <!-- ===== DEMO PANEL ===== -->
-<div id="demo" style="padding:var(--sp-12) var(--sp-6);">
+<div style="padding:var(--sp-12) var(--sp-6);">
     <div class="app-panel">
         <div class="app-panel-header">
             <span class="app-panel-title">See how this could transform your pre-procedure workflow</span>
@@ -546,6 +536,9 @@ hr.section-break{display:none}
             </div>
 
         </div>
+    </div>
+    <div style="text-align:center;margin-top:var(--sp-8);">
+        <a href="#survey" class="btn btn-primary btn-lg">Unlock your bespoke practice profile</a>
     </div>
 </div>
 
@@ -2253,7 +2246,7 @@ const Demo = {
     scheduleFeedbackPrompt() {
         if (this.feedbackPromptShown) return;
         clearTimeout(this.feedbackPromptTimer);
-        this.feedbackPromptTimer = setTimeout(() => this.showFeedbackPrompt(), 10000);
+        this.feedbackPromptTimer = setTimeout(() => this.showFeedbackPrompt(), 15000);
     },
 
     showFeedbackPrompt() {
@@ -2267,11 +2260,11 @@ const Demo = {
                 <div style="width:48px;height:48px;border-radius:50%;background:var(--brand-green-subtle);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-4);">
                     <svg style="width:24px;height:24px;color:var(--brand-green);" viewBox="0 0 20 20" fill="currentColor"><path d="M18 10c0 3.866-3.582 7-8 7a8.84 8.84 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0H9v2h2V9z"/></svg>
                 </div>
-                <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:var(--sp-2);">Help shape the future of pre-procedure safety</h3>
-                <p style="font-size:.875rem;color:var(--text-secondary);line-height:1.55;margin-bottom:var(--sp-6);">We are building this with early practitioners, not for them. Tell us what would cut the most risk, time, and cost for your practice. This is your window to shape what the tool becomes.</p>
+                <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:var(--sp-2);">Your bespoke risk-and-opportunity profile is ready to build</h3>
+                <p style="font-size:.875rem;color:var(--text-secondary);line-height:1.55;margin-bottom:var(--sp-6);">Based on what you've just seen, we can produce a personalised assessment for your practice - the specific risks you carry, the gaps in your current workflow, and where you're leaving money on the table. Takes 2 minutes.</p>
                 <div style="display:flex;gap:var(--sp-3);justify-content:center;">
-                    <button id="feedback-dismiss" class="btn btn-ghost">Maybe later</button>
-                    <a href="#survey" id="feedback-go" class="btn btn-primary">Shape the product</a>
+                    <button id="feedback-dismiss" class="btn btn-ghost">Not now</button>
+                    <a href="#survey" id="feedback-go" class="btn btn-primary">Build my profile</a>
                 </div>
             </div>`;
         document.body.appendChild(overlay);
@@ -2337,26 +2330,6 @@ const Demo = {
 };
 
 
-/* Scroll spy for side navigation */
-function initScrollSpy() {
-    const sideLinks = document.querySelectorAll('.side-nav a');
-    const sections = ['intro', 'demo', 'survey'].map(id => document.getElementById(id)).filter(Boolean);
-
-    if (!sideLinks.length || !sections.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                sideLinks.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-                });
-            }
-        });
-    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(section => observer.observe(section));
-}
 
 /* Drag-to-rank feature ranking */
 function initDragRanking() {
@@ -2475,7 +2448,6 @@ document.addEventListener('DOMContentLoaded', () => {
     Tracking.init();
     Demo.init();
     Forms.init();
-    initScrollSpy();
     initDragRanking();
 
     // Show/hide "Other" text fields
